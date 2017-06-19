@@ -102,7 +102,7 @@ abstract class Base_UnitTestCase extends \WP_UnitTestCase {
 		// Is Array sanity check.
 		if ( $this->methods && ( is_array( $this->methods ) && ! empty( $this->methods ) ) ) {
 			foreach ( $this->methods as $method ) {
-				$this->assertTrue( method_exists(  __NAMESPACE__ . '\\' . $this->class_name, $method ), 'The method "' . $method . '()" doesn\'t exist!' );
+				$this->assertTrue( method_exists( __NAMESPACE__ . '\\' . $this->class_name, $method ), 'The method "' . $method . '()" doesn\'t exist!' );
 			}
 		}
 	}
@@ -119,7 +119,7 @@ abstract class Base_UnitTestCase extends \WP_UnitTestCase {
 		// Is Array sanity check.
 		if ( $this->properties && ( is_array( $this->properties ) && ! empty( $this->properties ) ) ) {
 			foreach ( $this->properties as $property ) {
-				$this->assertTrue( property_exists(  __NAMESPACE__ . '\\' . $this->class_name, $property ), 'The property "$' . $property . '" doesn\'t exist!' );
+				$this->assertTrue( property_exists( __NAMESPACE__ . '\\' . $this->class_name, $property ), 'The property "$' . $property . '" doesn\'t exist!' );
 			}
 		}
 	}
