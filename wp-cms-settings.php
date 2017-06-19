@@ -27,7 +27,7 @@ use WP_CMS_Settings\Includes\Classes as Classes;
 // ==============================================
 require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . trailingslashit( 'includes' ) . 'autoload.php';
 
-if ( ! class_exists( 'WPCMS_Settings' ) ) {
+if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 
 	/**
 	 * Name
@@ -35,7 +35,7 @@ if ( ! class_exists( 'WPCMS_Settings' ) ) {
 	 * @author Jason Witt
 	 * @since  0.0.1
 	 */
-	class WPCMS_Settings {
+	class WP_CMS_Settings {
 
 		/**
 		 * Get the plugin Settings.
@@ -50,7 +50,7 @@ if ( ! class_exists( 'WPCMS_Settings' ) ) {
 		/**
 		 * Singleton instance of plugin.
 		 *
-		 * @var   WPCMS_Settings
+		 * @var   WP_CMS_Settings
 		 * @since 0.0.1
 		 */
 		protected static $single_instance = null;
@@ -123,7 +123,7 @@ if ( ! class_exists( 'WPCMS_Settings' ) ) {
  * @return Singleton instance of plugin class.
  */
 function wp_cms_settings() {
-	return WPCMS_Settings::get_instance();
+	return WP_CMS_Settings::get_instance();
 }
 add_action( 'plugins_loaded', array( wp_cms_settings(), 'init' ) );
 
