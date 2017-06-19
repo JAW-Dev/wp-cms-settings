@@ -109,21 +109,7 @@ if ( ! class_exists( 'WPCMS_Settings' ) ) {
 		 * @return void
 		 */
 		public function _activate() {
-
 			flush_rewrite_rules();
-		}
-
-		/**
-		 * Deactivate the plugin.
-		 * Uninstall routines should be in uninstall.php.
-		 *
-		 * @author Jason Witt
-		 * @since  0.0.1
-		 *
-		 * @return void
-		 */
-		public function _deactivate() {
-
 		}
 	}
 }
@@ -145,8 +131,3 @@ add_action( 'plugins_loaded', array( wp_cms_settings(), 'init' ) );
 // Activation
 // ==============================================
 register_activation_hook( __FILE__, array( wp_cms_settings(), '_activate' ) );
-
-// ==============================================
-// Deactivation
-// ==============================================
-register_deactivation_hook( __FILE__, array( wp_cms_settings(), '_deactivate' ) );
