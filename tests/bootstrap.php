@@ -23,10 +23,23 @@ require_once $_tests_dir . '/includes/functions.php';
  */
 function _manually_load_plugins() {
 
+	// Include the REST API main plugin file if we're using it so we can run endpoint tests.
+	if ( class_exists( 'WP_REST_Controller' ) && file_exists( WP_PLUGIN_DIR . '/rest-api/plugin.php' ) ) {
+		require WP_PLUGIN_DIR . '/rest-api/plugin.php';
+	}
+
 	// Require our plugin.
-	if ( file_exists( trailingslashit( PROJECT_DIR ) . 'wp-cms-settings.php' ) ) {
+	if ( file_exists( dirname( dirname( __FILE__ ) ) . '/wp-cms-settings.php' ) ) {
 		require dirname( dirname( __FILE__ ) ) . '/wp-cms-settings.php';
 	}
+
+	// Plugins to activate.
+	$active_plugins = array(
+		'wp-cms-settings/wp-cms-settings.php',
+	);
+
+	// Update the active_plugins options with the $active_plugins array.
+	update_option( 'active_plugins', $active_plugins );
 }
 
 // Inject in our plugin.
