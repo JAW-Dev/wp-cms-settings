@@ -80,7 +80,10 @@ if ( ! class_exists( 'WPCMS_Settings' ) ) {
 		 * @return void
 		 */
 		public function __construct() {
-			$this->get_settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
+			// Get the settings option.
+			$settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
+			// Pass an empty array if option is not set.
+			$this->get_settings = ( $settings ) ? $settings : array();
 		}
 
 		/**
