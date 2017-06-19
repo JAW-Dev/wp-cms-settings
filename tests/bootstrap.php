@@ -24,8 +24,8 @@ require_once $_tests_dir . '/includes/functions.php';
 function _manually_load_plugins() {
 
 	// Require our plugin.
-	if ( file_exists( trailingslashit( PROJECT_DIR ) . 'plugin-file-name.php' ) ) {
-		require dirname( dirname( __FILE__ ) ) . '/plugin-file-name.php';
+	if ( file_exists( trailingslashit( PROJECT_DIR ) . 'wp-cms-settings.php' ) ) {
+		require dirname( dirname( __FILE__ ) ) . '/wp-cms-settings.php';
 	}
 }
 
