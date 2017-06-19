@@ -12,7 +12,7 @@
  * Domain Path: /languages
  *
  * @package   WP_CMS_Settings
- * @author    Jason Witt <contact@jawittdesigns@gmail.com>
+ * @author    Jason Witt <contact@jawittdesigns.com>
  * @copyright Copyright (c) 2017, Jason Witt
  * @license   GNU General Public License v2 or later
  * @version   0.0.1
