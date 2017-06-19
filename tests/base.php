@@ -3,7 +3,7 @@
  * Base Test Class.
  *
  * @package    WP_CMS_Settings
- * @subpackage WP_CMS_Settings\Test
+ * @subpackage WP_CMS_Settings\Tests
  * @author     Jason Witt <contact@jawittdesigns.com>
  * @copyright  Copyright (c) 2017, Jason Witt
  * @license    GNU General Public License v2 or later
