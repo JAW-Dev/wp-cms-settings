@@ -20,6 +20,8 @@
 
 namespace WP_CMS_Settings;
 
+use WP_CMS_Settings\Includes\Classes as Classes;
+
 // ==============================================
 // Autoloader
 // ==============================================
@@ -34,6 +36,16 @@ if ( ! class_exists( 'WPCMS_Settings' ) ) {
 	 * @since  0.0.1
 	 */
 	class WPCMS_Settings {
+
+		/**
+		 * Get the plugin Settings.
+		 *
+		 * @author Jason Witt
+		 * @since  0.0.1
+		 *
+		 * @var array
+		 */
+		protected $get_settings;
 
 		/**
 		 * Singleton instance of plugin.
@@ -68,7 +80,7 @@ if ( ! class_exists( 'WPCMS_Settings' ) ) {
 		 * @return void
 		 */
 		public function __construct() {
-
+			$this->get_settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
 		}
 
 		/**
@@ -121,17 +133,17 @@ if ( ! class_exists( 'WPCMS_Settings' ) ) {
  *
  * @return Singleton instance of plugin class.
  */
-function plugin_function() {
+function wp_cms_settings() {
 	return WPCMS_Settings::get_instance();
 }
-add_action( 'plugins_loaded', array( plugin_function(), 'init' ) );
+add_action( 'plugins_loaded', array( wp_cms_settings(), 'init' ) );
 
 // ==============================================
 // Activation
 // ==============================================
-register_activation_hook( __FILE__, array( plugin_function(), '_activate' ) );
+register_activation_hook( __FILE__, array( wp_cms_settings(), '_activate' ) );
 
 // ==============================================
 // Deactivation
 // ==============================================
-register_deactivation_hook( __FILE__, array( plugin_function(), '_deactivate' ) );
+register_deactivation_hook( __FILE__, array( wp_cms_settings(), '_deactivate' ) );
