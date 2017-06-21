@@ -45,6 +45,7 @@
 			 'plugin_slug',
 			 'settings',
 			 'active_tab',
+			 'allowed_tags',
 		 );
 	 }
 
