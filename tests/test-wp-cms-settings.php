@@ -10,8 +10,6 @@
  * @version    0.0.1
  */
 
-namespace WP_CMS_Settings;
-
  /**
   * Main Plugin File Test.
   *
@@ -29,14 +27,15 @@ namespace WP_CMS_Settings;
 	  * @return void
 	  */
 	 public function setUp() {
-		 $this->file       = trailingslashit( plugin_dir_path( __DIR__ ) ) . 'wp-cms-settings.php';
-		 $this->class_name = 'WP_CMS_Settings';
+		 $this->file       = $this->dirname() . 'wp-cms-settings.php';
+		 $this->class_name = 'WP_CMS_Settings\\WP_CMS_Settings';
 		 $this->methods    = array(
 			 '_activate',
 			 'init',
 		 );
 		 $this->properties  = array(
-			 'get_settings',
+			'plugin_slug',
+			'get_settings',
 		 );
 	 }
 
@@ -46,6 +45,6 @@ namespace WP_CMS_Settings;
 	  * @since  1.0.0
 	  */
 	 function test_get_instance() {
-		 $this->assertInstanceOf( __NAMESPACE__ . '\\' . $this->class_name, wp_cms_settings() );
+		 $this->assertInstanceOf( $this->class_name, WP_CMS_Settings\wp_cms_settings() );
 	 }
  }
