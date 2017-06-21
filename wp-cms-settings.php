@@ -38,6 +38,16 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 	class WP_CMS_Settings {
 
 		/**
+		 * Plugin Slug.
+		 *
+		 * @author Jason Witt
+		 * @since  0.0.1
+		 *
+		 * @var sting
+		 */
+		public $plugin_slug = 'wp_cms_settings';
+
+		/**
 		 * Get the plugin Settings.
 		 *
 		 * @author Jason Witt
@@ -45,7 +55,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		 *
 		 * @var array
 		 */
-		protected $get_settings;
+		public $get_settings;
 
 		/**
 		 * Singleton instance of plugin.
@@ -67,7 +77,6 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 			if ( null === self::$single_instance ) {
 				self::$single_instance = new self();
 			}
-
 			return self::$single_instance;
 		}
 
@@ -95,9 +104,22 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		 * @return void
 		 */
 		public function init() {
-
 			// Load translated strings for plugin.
 			load_plugin_textdomain( 'wp-cms-settings', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+			// Instantiate Classes.
+			$this->classes();
+		}
+
+		/**
+		 * Instantiate Classes.
+		 *
+		 * @author Jason Witt
+		 * @since  0.0.1
+		 *
+		 * @return void
+		 */
+		public function classes() {
+			$settings = new Classes\Settings;
 		}
 
 		/**
@@ -109,6 +131,23 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		 * @return void
 		 */
 		public function _activate() {
+			// Deafult Settings.
+			$settings = array(
+				'enable_cms_settings' => 1,
+			);
+
+			// If is multisite.
+			if ( is_multisite() ) {
+
+				// Update site options.
+				update_site_option( $this->plugin_slug, $settings );
+			} else {
+
+				// Update options.
+				update_option( $this->plugin_slug, $settings );
+			}
+
+			// Flush Rewrite Rules.
 			flush_rewrite_rules();
 		}
 	}
