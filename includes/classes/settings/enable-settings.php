@@ -9,12 +9,24 @@
  * @license    GNU General Public License v2 or later
  * @version    0.0.1
  */
+$allowed_tags = array(
+	'tr'    => array(),
+	'th'    => array(),
+	'td'    => array(),
+	'input' => array(
+		'type'    => array(),
+		'name'    => array(),
+		'checked' => array(),
+		'value'   => array(),
+	),
+);
 
-$setting = 'enable_cms_settings';
-$name    = "{$this->plugin_slug}[{$setting}]";
-$checked = ( isset( $this->settings['enable_cms_settings'] ) ) ? $this->settings['enable_cms_settings'] : '';
-?>
-<tr>
-	<th><?php echo esc_html( __( 'Enable CMS Settings', 'wp-cms-settings' ) ); ?></th>
-	<td><input type="checkbox" name="<?php echo esc_attr( $name ); ?>" <?php checked( $checked, 1 ); ?> value="1" /></td>
-</tr>
+// Enable CMS Settings field.
+echo wp_kses( wpcmss_create_checkbox(
+		'enable_cms_settings',
+		__( 'Enable CMS Settings', 'wp-cms-settings' ),
+		$this->plugin_slug,
+		$this->settings
+	),
+	$allowed_tags
+);
