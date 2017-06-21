@@ -38,7 +38,6 @@
 			 'admin_notice',
 			 'include_fields',
 			 'get_active_tab',
-			 'checkbox_values',
 			 'sanitize',
 			 'redirect_after_save',
 		 );
