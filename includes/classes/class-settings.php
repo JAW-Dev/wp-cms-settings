@@ -55,6 +55,16 @@ if ( ! class_exists( 'Settings' ) ) {
 		protected $active_tab;
 
 		/**
+		 * Allowed tags.
+		 *
+		 * @author Jason Witt
+		 * @since  0.0.1
+		 *
+		 * @var array
+		 */
+		protected $allowed_tags;
+
+		/**
 		 * Initialize the class
 		 *
 		 * @author Jason Witt
@@ -72,6 +82,17 @@ if ( ! class_exists( 'Settings' ) ) {
 			$this->plugin_slug = Root\wp_cms_settings()->plugin_slug;
 			$this->settings    = Root\wp_cms_settings()->get_settings;
 			$this->active_tab  = ( isset( $_GET['tab'] ) ) ? sanitize_text_field( $_GET['tab'] ) : 'allowed-roles';
+			$this->allowed_tags = array(
+				'tr'    => array(),
+				'th'    => array(),
+				'td'    => array(),
+				'input' => array(
+					'type'    => array(),
+					'name'    => array(),
+					'checked' => array(),
+					'value'   => array(),
+				),
+			);
 
 			// Get the field views.
 			$this->fields = ( is_array( $this->include_fields() ) ) ? $this->include_fields() : array();
@@ -130,8 +151,8 @@ if ( ! class_exists( 'Settings' ) ) {
 					<?php wp_nonce_field( $this->plugin_slug . '_nonce', $this->plugin_slug . '_nonce' ); ?>
 					<h1><?php echo esc_html( get_admin_page_title() );?></h1>
 					<h2 class="nav-tab-wrapper">
-						<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=allowed-roles" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'allowed-roles' ) ); ?>">General</a>
-						<!-- <a href="?page=pro_dev_tools&tab=environment" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'environment' ) ); ?>">Environment</a> -->
+						<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=general" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'general' ) ); ?>">General</a>
+						<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=front-end" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'front-end' ) ); ?>">Front End</a>
 					</h2>
 					<table class="form-table">
 						<tbody>
