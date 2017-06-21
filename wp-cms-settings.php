@@ -138,6 +138,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 			// Deafult Settings.
 			$settings = array(
 				'enable_cms_settings' => 1,
+				'disable_emojis'      => 1,
 			);
 
 			// If is multisite.
