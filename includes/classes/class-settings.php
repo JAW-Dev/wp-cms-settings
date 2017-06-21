@@ -141,27 +141,31 @@ if ( ! class_exists( 'Settings' ) ) {
 		 * @return void
 		 */
 		public function render_settings_page() {
-			$action = ( is_multisite() ) ? 'edit.php?action=' . $this->plugin_slug : 'options-general.php';
+			$action = ( is_multisite() ) ?
+						network_admin_url( 'edit.php?action=' ) . $this->plugin_slug :
+						admin_url( 'options-general.php?page=' ) . $this->plugin_slug;
 			?>
 			<div class="wrap">
-				<form action="<?php echo esc_attr( $action ); ?>" method="post" />
+				<h1><?php echo esc_html( get_admin_page_title() );?></h1>
+				<h2 class="nav-tab-wrapper">
+					<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=general" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'general' ) ); ?>">General</a>
+					<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=front-end" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'front-end' ) ); ?>">Front End</a>
+				</h2>
 				<?php settings_errors(); ?>
-				<form method="post" />
+				<form action="<?php echo esc_attr( $action ); ?>" method="post">
 					<input type="hidden" name="action" value="update_<?php echo esc_attr( $this->plugin_slug ); ?>" />
 					<?php wp_nonce_field( $this->plugin_slug . '_nonce', $this->plugin_slug . '_nonce' ); ?>
-					<h1><?php echo esc_html( get_admin_page_title() );?></h1>
-					<h2 class="nav-tab-wrapper">
-						<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=general" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'general' ) ); ?>">General</a>
-						<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=front-end" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'front-end' ) ); ?>">Front End</a>
-					</h2>
 					<table class="form-table">
 						<tbody>
 							<?php
 							if ( ! empty( $this->fields ) ) {
 								switch ( $this->active_tab ) {
-									case 'enable-settings':
+									case 'front-end':
+										include $this->fields['front-end'];
+									break;
+									case 'general':
 									default:
-										include $this->fields['enable-settings'];
+										include $this->fields['general'];
 									break;
 								}
 							}
@@ -172,51 +176,6 @@ if ( ! class_exists( 'Settings' ) ) {
 				</form>
 			</div>
 			<?php
-		}
-
-		/**
-		 * Save.
-		 *
-		 * @author Jason Witt
-		 * @since  0.0.1
-		 *
-		 * @return void
-		 */
-		public function save() {
-
-			// Only run if form is saved.
-			if ( ! isset( $_POST['submit'] ) ) {
-				return;
-			}
-
-			// The form nonce.
-			$nonce = $this->plugin_slug . '_nonce';
-
-			// Bail if nonce is not verified.
-			if ( ! isset( $_POST[ $nonce ] ) || ! wp_verify_nonce( $_POST[ $nonce ], $nonce ) ) {
-				return;
-			}
-
-			// The post data.
-			$post_set = ( isset( $_POST[ $this->plugin_slug ] ) || ! empty( $_POST[ $this->plugin_slug ] ) );
-			$settings = ( $post_set ) ? $this->sanitize( $_POST[ $this->plugin_slug ] ) : array();
-
-			$this->checkbox_values( $settings );
-
-			if ( isset( $settings ) ) {
-				if ( is_multisite() ) {
-
-					// Update site options.
-					update_site_option( $this->plugin_slug, $settings );
-				} else {
-
-					// Update options.
-					update_option( $this->plugin_slug, $settings );
-				}
-			}
-
-			// Redirect after save.
-			$this->redirect_after_save();
 		}
 
 		/**
@@ -235,6 +194,51 @@ if ( ! class_exists( 'Settings' ) ) {
 				</div>
 				<?php
 			}
+		}
+
+		/**
+		 * Save.
+		 *
+		 * @author Jason Witt
+		 * @since  0.0.1
+		 *
+		 * @return void
+		 */
+		public function save() {
+
+			// Only run if form is saved.
+			if ( ! isset( $_POST['submit'] ) ) {
+				return;
+			}
+
+			// The form nonce.
+			$nonce   = $this->plugin_slug . '_nonce';
+			$options = $this->settings;
+			$post    = $_POST[ $this->plugin_slug ];
+
+			// Bail if nonce is not verified.
+			if ( ! isset( $_POST[ $nonce ] ) || ! wp_verify_nonce( $_POST[ $nonce ], $nonce ) ) {
+				return;
+			}
+
+			// // The post data.
+			$settings = ( isset( $post ) || ! empty( $post ) ) ? $this->sanitize( $post ) : array();
+			$settings = array_merge( $options, $post );
+
+			if ( isset( $settings ) ) {
+				if ( is_multisite() ) {
+
+					// Update site options.
+					update_site_option( $this->plugin_slug, $settings );
+				} else {
+
+					// Update options.
+					update_option( $this->plugin_slug, $settings );
+				}
+			}
+
+			// Redirect after save.
+			$this->redirect_after_save();
 		}
 
 		/**
@@ -269,38 +273,6 @@ if ( ! class_exists( 'Settings' ) ) {
 		private function get_active_tab( $slug ) {
 			$class = ( $slug === $this->active_tab ) ? ' nav-tab-active' : '';
 			return $class;
-		}
-
-		/**
-		 * Checkbox Values.
-		 *
-		 * @author Jason Witt
-		 * @since  0.0.1
-		 *
-		 * @param array $settings The array of settings.
-		 *
-		 * @return array $settings The array of setting with the correct checkbox values.
-		 */
-		private function checkbox_values( $settings ) {
-
-			// Bail if settings is not set or empty.
-			if ( ! isset( $_POST[ $this->plugin_slug ] ) || empty( $_POST[ $this->plugin_slug ] ) ) {
-				return;
-			}
-
-			// The checkboxes.
-			$checkboxes = array(
-				'enable_cms_settings',
-			);
-
-			// Ensure the checkboxes get the correct value.
-			foreach ( $checkboxes as $checkbox ) {
-				if ( ! isset( $settings[ $checkbox ] ) ) {
-					$settings[ $checkbox ] = 0;
-				}
-			}
-
-			return $settings;
 		}
 
 		/**
