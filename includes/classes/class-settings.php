@@ -86,6 +86,10 @@ if ( ! class_exists( 'Settings' ) ) {
 				'tr'    => array(),
 				'th'    => array(),
 				'td'    => array(),
+				'a'     => array(
+					'href'  => array(),
+					'class' => array(),
+				),
 				'input' => array(
 					'type'    => array(),
 					'name'    => array(),
@@ -148,8 +152,15 @@ if ( ! class_exists( 'Settings' ) ) {
 			<div class="wrap">
 				<h1><?php echo esc_html( get_admin_page_title() );?></h1>
 				<h2 class="nav-tab-wrapper">
-					<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=general" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'general' ) ); ?>">General</a>
-					<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=front-end" class="nav-tab<?php echo esc_attr( $this->get_active_tab( 'front-end' ) ); ?>">Front End</a>
+					<?php
+					echo wp_kses(
+						$this->tabs( array(
+							'general'   => __( 'General', 'wp-cms-settings' ),
+							'front-end' => __( 'Front End', 'wp-cms-settings' ),
+						) ),
+						$this->allowed_tags
+					);
+					?>
 				</h2>
 				<?php settings_errors(); ?>
 				<form action="<?php echo esc_attr( $action ); ?>" method="post">
@@ -176,6 +187,24 @@ if ( ! class_exists( 'Settings' ) ) {
 				</form>
 			</div>
 			<?php
+		}
+
+		/**
+		 * Tabs.
+		 *
+		 * @author Jason Witt
+		 * @since  0.0.1
+		 *
+		 * @param array $args The tabs arguments.
+		 *
+		 * @return void
+		 */
+		public function tabs( $args = array() ) {
+			foreach ( $args as $slug => $title ) :
+			?>
+				<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=<?php echo esc_attr( $slug ); ?>" class="nav-tab<?php echo esc_attr( $this->get_active_tab( $slug ) ); ?>"><?php echo esc_html( $title ); ?></a>
+			<?php
+			endforeach;
 		}
 
 		/**
