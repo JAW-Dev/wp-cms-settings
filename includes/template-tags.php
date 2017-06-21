@@ -26,11 +26,14 @@ if ( ! function_exists( 'wpcmss_create_checkbox' ) ) {
 	 */
 	function wpcmss_create_checkbox( $option, $label, $plugin_slug, $settings ) {
 		$name    = "{$plugin_slug}[{$option}]";
-		$checked = ( isset( $settings['enable_cms_settings'] ) ) ? $settings['enable_cms_settings'] : '';
+		$checked = ( isset( $settings[ $option ] ) ) ? $settings[ $option ] : '';
 		?>
 		<tr>
 			<th><?php echo esc_html( $label ); ?></th>
-			<td><input type="checkbox" name="<?php echo esc_attr( $name ); ?>" <?php checked( $checked, 1 ); ?> value="1" /></td>
+			<td>
+				<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="0" />
+				<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" <?php checked( $checked, 1 ); ?> value="1" />
+			</td>
 		</tr>
 		<?php
 	}
