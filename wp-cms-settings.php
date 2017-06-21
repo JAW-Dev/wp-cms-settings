@@ -106,6 +106,10 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		public function init() {
 			// Load translated strings for plugin.
 			load_plugin_textdomain( 'wp-cms-settings', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+			// Load Template Tags.
+			include trailingslashit( plugin_dir_path( __FILE__ ) ) . 'includes/template-tags.php';
+
 			// Instantiate Classes.
 			$this->classes();
 		}
