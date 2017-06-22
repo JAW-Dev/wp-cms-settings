@@ -11,17 +11,15 @@
  */
 ?>
 <tr>
-	<th style="padding: 0 10px 0">
+	<th>
 		<h2><?php echo esc_html( __( 'General Settings', 'wp-cms-settings' ) ); ?></h2>
 	</th>
 </tr>
 <?php
 // Enable CMS Settings field.
-echo wp_kses( wpcmss_create_checkbox(
-		'enable_cms_settings',
-		__( 'Enable CMS Settings', 'wp-cms-settings' ),
-		$this->plugin_slug,
-		$this->settings
-	),
-	$this->allowed_tags
+echo wp_kses_post( wpcmss_create_checkbox( array(
+		'option' => 'enable_cms_settings',
+		'label'  => __( 'Enable CMS Settings', 'wp-cms-settings' ),
+		'description' => __( 'Globaly enable the CMS Settings', 'wp-cms-settings' ),
+	) )
 );

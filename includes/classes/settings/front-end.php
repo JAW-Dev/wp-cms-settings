@@ -11,17 +11,15 @@
  */
 ?>
 <tr>
-	<th style="padding: 0 10px 0">
+	<th>
 		<h2><?php echo esc_html( __( 'Front End Features', 'wp-cms-settings' ) ); ?></h2>
 	</th>
 </tr>
 <?php
 // Disable emojis.
-echo wp_kses( wpcmss_create_checkbox(
-		'disable_emojis',
-		__( 'Disable Emojis', 'wp-cms-settings' ),
-		$this->plugin_slug,
-		$this->settings
-	),
-	$this->allowed_tags
+echo wp_kses_post( wpcmss_create_checkbox( array(
+		'option' => 'disable_emojis',
+		'label'  => __( 'Disable Emojis', 'wp-cms-settings' ),
+		'description' => __( 'Remove the Emojis CSS and JavaScript', 'wp-cms-settings' ),
+	) )
 );
