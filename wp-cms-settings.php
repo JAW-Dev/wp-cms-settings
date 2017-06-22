@@ -129,6 +129,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 			// If enable CMS settings is enabled.
 			if ( isset( $option ) && $option ) {
 				$disable_emojis = new Classes\Disable_Emojis;
+				$disable_feeds  = new Classes\Disable_Feeds;
 			}
 		}
 
@@ -145,6 +146,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 			$settings = array(
 				'enable_cms_settings' => 1,
 				'disable_emojis'      => 1,
+				'disable_feeds'       => 1,
 			);
 
 			// If is multisite.

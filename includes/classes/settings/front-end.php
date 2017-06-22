@@ -23,3 +23,10 @@ echo wp_kses_post( wpcmss_create_checkbox( array(
 		'description' => __( 'Remove the Emojis CSS and JavaScript', 'wp-cms-settings' ),
 	) )
 );
+// Disable Feed Links.
+echo wp_kses_post( wpcmss_create_checkbox( array(
+		'option' => 'disable_feeds',
+		'label'  => __( 'Disable RSS and Atom Feeds', 'wp-cms-settings' ),
+		'description' => __( 'Disable RSS and Atom feeds and remove the feed links from the head', 'wp-cms-settings' ),
+	) )
+);
