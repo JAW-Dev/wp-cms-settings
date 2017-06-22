@@ -55,16 +55,6 @@ if ( ! class_exists( 'Settings' ) ) {
 		protected $active_tab;
 
 		/**
-		 * Allowed tags.
-		 *
-		 * @author Jason Witt
-		 * @since  0.0.1
-		 *
-		 * @var array
-		 */
-		protected $allowed_tags;
-
-		/**
 		 * Initialize the class
 		 *
 		 * @author Jason Witt
@@ -82,21 +72,6 @@ if ( ! class_exists( 'Settings' ) ) {
 			$this->plugin_slug = Root\wp_cms_settings()->plugin_slug;
 			$this->settings    = Root\wp_cms_settings()->get_settings;
 			$this->active_tab  = ( isset( $_GET['tab'] ) ) ? sanitize_text_field( $_GET['tab'] ) : 'allowed-roles';
-			$this->allowed_tags = array(
-				'tr'    => array(),
-				'th'    => array(),
-				'td'    => array(),
-				'a'     => array(
-					'href'  => array(),
-					'class' => array(),
-				),
-				'input' => array(
-					'type'    => array(),
-					'name'    => array(),
-					'checked' => array(),
-					'value'   => array(),
-				),
-			);
 
 			// Get the field views.
 			$this->fields = ( is_array( $this->include_fields() ) ) ? $this->include_fields() : array();
@@ -153,12 +128,11 @@ if ( ! class_exists( 'Settings' ) ) {
 				<h1><?php echo esc_html( get_admin_page_title() );?></h1>
 				<h2 class="nav-tab-wrapper">
 					<?php
-					echo wp_kses(
+					echo wp_kses_post(
 						$this->tabs( array(
 							'general'   => __( 'General', 'wp-cms-settings' ),
 							'front-end' => __( 'Front End', 'wp-cms-settings' ),
-						) ),
-						$this->allowed_tags
+						) )
 					);
 					?>
 				</h2>
