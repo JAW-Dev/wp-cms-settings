@@ -123,19 +123,22 @@ if ( ! class_exists( 'Settings' ) ) {
 			$action = ( is_multisite() ) ?
 						network_admin_url( 'edit.php?action=' ) . $this->plugin_slug :
 						admin_url( 'options-general.php?page=' ) . $this->plugin_slug;
+			$option = $this->settings['enable_cms_settings'];
 			?>
 			<div class="wrap">
 				<h1><?php echo esc_html( get_admin_page_title() );?></h1>
-				<h2 class="nav-tab-wrapper">
-					<?php
-					echo wp_kses_post(
-						$this->tabs( array(
-							'general'   => __( 'General', 'wp-cms-settings' ),
-							'front-end' => __( 'Front End', 'wp-cms-settings' ),
-						) )
-					);
-					?>
-				</h2>
+				<?php if ( isset( $option ) && $option ) : ?>
+					<h2 class="nav-tab-wrapper">
+						<?php
+						echo wp_kses_post(
+							$this->tabs( array(
+								'general'   => __( 'General', 'wp-cms-settings' ),
+								'front-end' => __( 'Front End', 'wp-cms-settings' ),
+							) )
+						);
+						?>
+					</h2>
+				<?php endif; ?>
 				<?php settings_errors(); ?>
 				<form action="<?php echo esc_attr( $action ); ?>" method="post">
 					<input type="hidden" name="action" value="update_<?php echo esc_attr( $this->plugin_slug ); ?>" />
@@ -175,9 +178,9 @@ if ( ! class_exists( 'Settings' ) ) {
 		 */
 		public function tabs( $args = array() ) {
 			foreach ( $args as $slug => $title ) :
-			?>
+				?>
 				<a href="?page=<?php echo esc_html( $this->plugin_slug ); ?>&tab=<?php echo esc_attr( $slug ); ?>" class="nav-tab<?php echo esc_attr( $this->get_active_tab( $slug ) ); ?>"><?php echo esc_html( $title ); ?></a>
-			<?php
+				<?php
 			endforeach;
 		}
 
