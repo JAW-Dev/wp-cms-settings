@@ -57,7 +57,7 @@ if ( ! class_exists( 'Disable_Emojis' ) ) {
 		 * @return void
 		 */
 		public function init() {
-			$option = $this->settings['disable_emojis'];
+			$option = ( isset( $this->settings['disable_emojis'] ) ) ? $this->settings['disable_emojis'] : '';
 			if ( isset( $option ) && $option ) {
 				add_action( 'init', array( $this, 'disable_emojis' ) );
 			}
