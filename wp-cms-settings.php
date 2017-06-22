@@ -123,7 +123,13 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		 * @return void
 		 */
 		public function classes() {
+			$option   = $this->get_settings['enable_cms_settings'];
 			$settings = new Classes\Settings;
+
+			// If enable CMS settings is enabled.
+			if ( isset( $option ) && $option ) {
+				$disable_emojis = new Classes\Disable_Emojis;
+			}
 		}
 
 		/**
