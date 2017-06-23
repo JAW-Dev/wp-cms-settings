@@ -61,8 +61,8 @@ if ( ! function_exists( 'wpcmss_create_checkbox' ) ) {
 						<span><?php echo esc_html( $args['label'] ); ?></span>
 					</legend>
 					<label for="<?php echo esc_attr( $name ); ?>">
-						<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="0" />
-						<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" <?php checked( $checked, 1 ); ?> id="<?php echo esc_attr( $args['option'] ); ?>" value="1" />
+						<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="false" />
+						<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" <?php checked( $checked, 'true' ); ?> id="<?php echo esc_attr( $args['option'] ); ?>" value="true" />
 						<?php if ( isset( $args['description'] ) ) : ?>
 							<span class='field__description'><?php echo esc_html( $args['description'] ); ?></span>
 						<?php endif; ?>

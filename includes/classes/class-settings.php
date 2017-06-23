@@ -123,11 +123,11 @@ if ( ! class_exists( 'Settings' ) ) {
 			$action = ( is_multisite() ) ?
 						network_admin_url( 'edit.php?action=' ) . $this->plugin_slug :
 						admin_url( 'options-general.php?page=' ) . $this->plugin_slug;
-			$option = $this->settings['enable_cms_settings'];
+			$option = ( isset( $this->settings['enable_cms_settings'] ) ) ? $this->settings['enable_cms_settings'] : 'false';
 			?>
 			<div class="wrap">
 				<h1><?php echo esc_html( get_admin_page_title() );?></h1>
-				<?php if ( isset( $option ) && $option ) : ?>
+				<?php if ( 'true' === $option ) : ?>
 					<h2 class="nav-tab-wrapper">
 						<?php
 						echo wp_kses_post(

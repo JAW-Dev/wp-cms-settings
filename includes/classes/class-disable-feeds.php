@@ -57,8 +57,8 @@ if ( ! class_exists( 'Disable_Feeds' ) ) {
 		 * @return void
 		 */
 		public function init() {
-			$option = ( isset( $this->settings['disable_feeds'] ) ) ? $this->settings['disable_feeds'] : '';
-			if ( isset( $option ) && $option ) {
+			$option = ( isset( $this->settings['disable_feeds'] ) ) ? $this->settings['disable_feeds'] : 'false';
+			if ( 'true' === $option ) {
 				add_action( 'init', array( $this, 'disable_feeds' ) );
 			}
 		}

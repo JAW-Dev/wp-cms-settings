@@ -123,11 +123,11 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		 * @return void
 		 */
 		public function classes() {
-			$option   = $this->get_settings['enable_cms_settings'];
+			$option   = ( isset( $this->get_settings['enable_cms_settings'] ) ) ? $this->get_settings['enable_cms_settings'] : 'false';
 			$settings = new Classes\Settings;
 
 			// If enable CMS settings is enabled.
-			if ( isset( $option ) && $option ) {
+			if ( isset( $option ) && 'true' === $option ) {
 				$disable_emojis = new Classes\Disable_Emojis;
 				$disable_feeds  = new Classes\Disable_Feeds;
 			}
@@ -144,9 +144,9 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		public function _activate() {
 			// Deafult Settings.
 			$settings = array(
-				'enable_cms_settings' => 1,
-				'disable_emojis'      => 1,
-				'disable_feeds'       => 1,
+				'enable_cms_settings' => 'true',
+				'disable_emojis'      => 'true',
+				'disable_feeds'       => 'true',
 			);
 
 			// If is multisite.
