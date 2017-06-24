@@ -74,13 +74,18 @@ if ( ! class_exists( 'Disable_Feeds' ) ) {
 		public function disable_feeds() {
 			remove_action( 'wp_head', 'feed_links', 2 );
 			remove_action( 'wp_head', 'feed_links_extra', 3 );
-			add_action( 'do_feed', array( $this, 'disable_feed_page' ),1 );
-			add_action( 'do_feed_rdf', array( $this, 'disable_feed_page' ),1 );
-			add_action( 'do_feed_rss', array( $this, 'disable_feed_page' ),1 );
-			add_action( 'do_feed_rss2', array( $this, 'disable_feed_page' ),1 );
-			add_action( 'do_feed_atom', array( $this, 'disable_feed_page' ),1 );
-			add_action( 'do_feed_rss2_comments', array( $this, 'disable_feed_page' ),1 );
-			add_action( 'do_feed_atom_comments', array( $this, 'disable_feed_page' ),1 );
+			$actions = array(
+				'do_feed',
+				'do_feed_rdf',
+				'do_feed_rss',
+				'do_feed_rss2',
+				'do_feed_atom',
+				'do_feed_rss2_comments',
+				'do_feed_atom_comments',
+			);
+			foreach ( $actions as $action ) {
+				add_action( $action, array( $this, 'disable_feed_page' ),1 );
+			}
 		}
 
 		/**
