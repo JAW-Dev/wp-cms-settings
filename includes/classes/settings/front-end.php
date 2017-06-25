@@ -2,6 +2,8 @@
 /**
  * Front End
  *
+ * Load: true
+ *
  * @package    WP_CMS_Settings
  * @subpackage WP_CMS_Settings/Includes/Classes/Settings
  * @author     Jason Witt <contact@jawittdesigns.com>
