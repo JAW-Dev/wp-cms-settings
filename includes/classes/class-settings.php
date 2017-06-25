@@ -257,9 +257,18 @@ if ( ! class_exists( 'Settings' ) ) {
 		 */
 		private function include_fields() {
 			$fields = array();
-			foreach ( glob( trailingslashit( dirname( __FILE__ ) ) . 'settings/*.php' ) as $file ) {
-				if ( file_exists( $file ) ) {
-					$name = str_replace( '.php', '', basename( $file ) );
+			$dir    = trailingslashit( dirname( __FILE__ ) ) . 'settings';
+			$files  = scandir( trailingslashit( dirname( __FILE__ ) ) . 'settings' );
+			foreach ( $files as $file ) {
+				if ( ('.' === $file ) || ( '..' === $file ) ) {
+					continue;
+				}
+				$file      = trailingslashit( $dir ) . $file;
+				$header    = get_file_data( $file, array( 'Load' => 'Load' ) );
+				$extension = substr( $file, strrpos( $file, '.' ) + 1 );
+
+				if ( 'true' === $header['Load'] && 'php' === $extension ) {
+					$name            = str_replace( '.php', '', basename( $file ) );
 					$fields[ $name ] = $file;
 				}
 			}
