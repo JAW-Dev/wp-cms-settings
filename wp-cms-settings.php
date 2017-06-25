@@ -128,8 +128,9 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 
 			// If enable CMS settings is enabled.
 			if ( isset( $option ) && 'true' === $option ) {
-				$disable_emojis = new Classes\Disable_Emojis;
-				$disable_feeds  = new Classes\Disable_Feeds;
+				$disable_emojis     = new Classes\Disable_Emojis;
+				$disable_feeds      = new Classes\Disable_Feeds;
+				$disable_meta_links = new Classes\Disable_Meta_links;
 			}
 		}
 
@@ -144,9 +145,12 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		public function _activate() {
 			// Deafult Settings.
 			$settings = array(
-				'enable_cms_settings' => 'true',
-				'disable_emojis'      => 'true',
-				'disable_feeds'       => 'true',
+				'enable_cms_settings'  => 'true',
+				'disable_emojis'       => 'true',
+				'disable_feeds'        => 'true',
+				'disable_wlwmanifest'  => 'true',
+				'disable_wp_generator' => 'true',
+				'disable_wp_shortlink' => 'true',
 			);
 
 			// If is multisite.

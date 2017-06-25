@@ -29,6 +29,27 @@ echo wp_kses_post( wpcmss_create_checkbox( array(
 echo wp_kses_post( wpcmss_create_checkbox( array(
 		'option' => 'disable_feeds',
 		'label'  => __( 'Disable RSS and Atom Feeds', 'wp-cms-settings' ),
-		'description' => __( 'Disable RSS and Atom feeds and remove the feed links from the head', 'wp-cms-settings' ),
+		'description' => __( 'Disable RSS and Atom feed links', 'wp-cms-settings' ),
+	) )
+);
+// Disable wlwmanifest.
+echo wp_kses_post( wpcmss_create_checkbox( array(
+		'option' => 'disable_wlwmanifest',
+		'label'  => __( 'Disable wlwmanifest', 'wp-cms-settings' ),
+		'description' => __( 'Disable the wlwmanifest meta link', 'wp-cms-settings' ),
+	) )
+);
+// Disable wp_generator.
+echo wp_kses_post( wpcmss_create_checkbox( array(
+		'option' => 'disable_wp_generator',
+		'label'  => __( 'Disable WP Generator', 'wp-cms-settings' ),
+		'description' => __( 'Disable the WP Generator meta link', 'wp-cms-settings' ),
+	) )
+);
+// Disable wp_shortlink.
+echo wp_kses_post( wpcmss_create_checkbox( array(
+		'option' => 'disable_wp_shortlink',
+		'label'  => __( 'Disable WP Shortlink', 'wp-cms-settings' ),
+		'description' => __( 'Disable the WP Shortlink meta link', 'wp-cms-settings' ),
 	) )
 );
