@@ -25,9 +25,10 @@ if ( ! function_exists( 'wpcmss_create_checkbox' ) ) {
 	 * @param array $args {
 	 *     The arguments.
 	 *
-	 *     @type string $option      The name for the field.
-	 *     @type string $label       The label for the field.
-	 *     @type string $description The description for the field.
+	 *     @type string $option      Name for the field.
+	 *     @type string $label       Label for the field.
+	 *     @type string $description Description for the field.
+	 *     @type string $classes     Custom classes for the table row.
 	 *     @type string $plugin_slug The plugin slug.
 	 *     @type array  $settings    The plugin settings.
 	 * }
@@ -41,17 +42,18 @@ if ( ! function_exists( 'wpcmss_create_checkbox' ) ) {
 			'option'      => '',
 			'label'       => '',
 			'description' => '',
+			'classes'     => '',
 			'plugin_slug' => \WP_CMS_Settings\wp_cms_settings()->plugin_slug,
 			'settings'    => \WP_CMS_Settings\wp_cms_settings()->get_settings,
 		);
 
 		// The arguments.
-		$args = wp_parse_args( $args, $defaults );
-
+		$args    = wp_parse_args( $args, $defaults );
 		$name    = "{$args['plugin_slug']}[{$args['option']}]";
 		$checked = ( isset( $args['settings'][ $args['option'] ] ) ) ? $args['settings'][ $args['option'] ] : '';
+		$classes = ( isset( $args['classes'] ) ) ? ' ' . $args['classes'] : '';
 		?>
-		<tr class="wpcmss__field <?php echo esc_attr( $args['option'] ); ?>">
+		<tr class="wpcmss__field <?php echo esc_attr( $args['option'] ) . esc_attr( $classes ); ?>">
 			<th class='field__heading' scope="row">
 				<?php echo esc_html( $args['label'] ); ?>
 			</th>
