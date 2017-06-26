@@ -17,7 +17,7 @@ use \WP_CMS_Settings as Root;
 if ( ! class_exists( 'Disable_Feeds' ) ) {
 
 	/**
-	 * Name
+	 * Disable Feeds.
 	 *
 	 * @author Jason Witt
 	 * @since  0.0.1

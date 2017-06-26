@@ -17,7 +17,7 @@ use \WP_CMS_Settings as Root;
 if ( ! class_exists( 'Disable_Emojis' ) ) {
 
 	/**
-	 * Name
+	 * Disable Emojis.
 	 *
 	 * @author Jason Witt
 	 * @since  0.0.1
