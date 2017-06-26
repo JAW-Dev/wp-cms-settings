@@ -49,11 +49,12 @@ if ( ! function_exists( 'wpcmss_create_checkbox' ) ) {
 
 		// The arguments.
 		$args    = wp_parse_args( $args, $defaults );
+		$option  = ( isset( $args['option'] ) ) ? ' ' . $args['option'] : '';
 		$name    = "{$args['plugin_slug']}[{$args['option']}]";
 		$checked = ( isset( $args['settings'][ $args['option'] ] ) ) ? $args['settings'][ $args['option'] ] : '';
 		$classes = ( isset( $args['classes'] ) ) ? ' ' . $args['classes'] : '';
 		?>
-		<tr class="wpcmss__field <?php echo esc_attr( $args['option'] ) . esc_attr( $classes ); ?>">
+		<tr class="wpcmss__field <?php echo esc_attr( $option ); ?><?php echo esc_attr( $classes ); ?>">
 			<th class='field__heading' scope="row">
 				<?php echo esc_html( $args['label'] ); ?>
 			</th>
