@@ -17,11 +17,6 @@ if ( ! function_exists( 'wpcmss_create_checkbox' ) ) {
 	 * @author Jason Witt
 	 * @since  0.0.1
 	 *
-	 * @param string $option      The name for the field.
-	 * @param string $label       The label for the field.
-	 * @param string $plugin_slug The plugin slug.
-	 * @param array  $settings    The plugin settings.
-	 *
 	 * @param array $args {
 	 *     The arguments.
 	 *

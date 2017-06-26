@@ -22,9 +22,9 @@ namespace WP_CMS_Settings;
 
 use WP_CMS_Settings\Includes\Classes as Classes;
 
-// ==============================================
-// Autoloader
-// ==============================================
+/**
+ * Autoloader
+ */
 require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . trailingslashit( 'includes' ) . 'autoload.php';
 
 if ( ! class_exists( 'WP_CMS_Settings' ) ) {
@@ -199,7 +199,7 @@ function wp_cms_settings() {
 }
 add_action( 'plugins_loaded', array( wp_cms_settings(), 'init' ) );
 
-// ==============================================
-// Activation
-// ==============================================
+/**
+ * Activation
+ */
 register_activation_hook( __FILE__, array( wp_cms_settings(), '_activate' ) );
