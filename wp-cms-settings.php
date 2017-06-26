@@ -131,6 +131,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 				$disable_emojis     = new Classes\Disable_Emojis;
 				$disable_feeds      = new Classes\Disable_Feeds;
 				$disable_meta_links = new Classes\Disable_Meta_Links;
+				$remove_widgets     = new Classes\Remove_Widgets;
 			}
 		}
 
@@ -145,12 +146,27 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		public function _activate() {
 			// Deafult Settings.
 			$settings = array(
-				'enable_cms_settings'  => 'true',
-				'disable_emojis'       => 'true',
-				'disable_feeds'        => 'true',
-				'disable_wlwmanifest'  => 'true',
-				'disable_wp_generator' => 'true',
-				'disable_wp_shortlink' => 'true',
+				'enable_cms_settings'           => 'true',
+				'disable_emojis'                => 'true',
+				'disable_feeds'                 => 'true',
+				'disable_wlwmanifest'           => 'true',
+				'disable_wp_generator'          => 'true',
+				'disable_wp_shortlink'          => 'true',
+				'remove_widget_pages'           => 'true',
+				'remove_widget_calendar'        => 'true',
+				'remove_widget_archives'        => 'true',
+				'remove_widget_media_audio'     => 'true',
+				'remove_widget_media_image'     => 'true',
+				'remove_widget_media_video'     => 'true',
+				'remove_widget_meta'            => 'true',
+				'remove_widget_search'          => 'true',
+				'remove_widget_text'            => 'true',
+				'remove_widget_categories'      => 'true',
+				'remove_widget_recent_posts'    => 'true',
+				'remove_widget_recent_comments' => 'true',
+				'remove_widget_rss'             => 'true',
+				'remove_widget_tag_cloud'       => 'true',
+				'remove_widget_nav_menu'        => 'true',
 			);
 
 			// If is multisite.

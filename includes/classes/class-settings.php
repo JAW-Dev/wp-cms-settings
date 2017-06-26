@@ -134,6 +134,7 @@ if ( ! class_exists( 'Settings' ) ) {
 							$this->tabs( array(
 								'general'   => __( 'General', 'wp-cms-settings' ),
 								'front-end' => __( 'Front End', 'wp-cms-settings' ),
+								'widgets'   => __( 'Widgets', 'wp-cms-settings' ),
 							) )
 						);
 						?>
@@ -150,6 +151,9 @@ if ( ! class_exists( 'Settings' ) ) {
 								switch ( $this->active_tab ) {
 									case 'front-end':
 										include $this->fields['front-end'];
+									break;
+									case 'widgets':
+										include $this->fields['widgets'];
 									break;
 									case 'general':
 									default:
