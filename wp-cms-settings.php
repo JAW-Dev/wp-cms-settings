@@ -130,7 +130,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 			if ( isset( $option ) && 'true' === $option ) {
 				$disable_emojis     = new Classes\Disable_Emojis;
 				$disable_feeds      = new Classes\Disable_Feeds;
-				$disable_meta_links = new Classes\Disable_Meta_links;
+				$disable_meta_links = new Classes\Disable_Meta_Links;
 			}
 		}
 

@@ -14,15 +14,15 @@ namespace WP_CMS_Settings\Includes\Classes;
 
 use \WP_CMS_Settings as Root;
 
-if ( ! class_exists( 'Disable_Meta_links' ) ) {
+if ( ! class_exists( 'Disable_Meta_Links' ) ) {
 
 	/**
-	 * Name
+	 * Disable Meta Links.
 	 *
 	 * @author Jason Witt
 	 * @since  0.0.1
 	 */
-	class Disable_Meta_links {
+	class Disable_Meta_Links {
 
 		/**
 		 * Settings.
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Disable_Meta_links' ) ) {
 				add_action( 'init', array( $this, 'disable_wp_shortlink' ) );
 			}
 		}
-		
+
 		/**
 		 * Disable wlwmanifest.
 		 *
@@ -82,7 +82,7 @@ if ( ! class_exists( 'Disable_Meta_links' ) ) {
 		public function disable_wlwmanifest() {
 			remove_action( 'wp_head', 'wlwmanifest_link' );
 		}
-		
+
 		/**
 		 * Disable WP Generator.
 		 *
