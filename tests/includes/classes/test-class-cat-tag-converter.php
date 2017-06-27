@@ -68,6 +68,7 @@
 			 $this->assertEquals( $hook['priority'], has_action( $hook['hook_name'], array( $this->class, $hook['method'] ) ), 'init() is not attaching ' . $hook['method'] . '() to ' . $hook['hook_name'] . '!' );
 		 }
 	 }
+
 	 /**
 	  * Test Tools Page.
 	  *
