@@ -131,9 +131,10 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 				$disable_emojis           = new Classes\Disable_Emojis;
 				$disable_feeds            = new Classes\Disable_Feeds;
 				$disable_meta_links       = new Classes\Disable_Meta_Links;
-				$remove_widgets           = new Classes\Remove_Widgets;
 				$disable_press_this       = new Classes\Disable_Press_This;
 				$remove_cat_tag_converter = new Classes\Remove_Cat_Tag_Converter;
+				$remove_dashboard_widgets = new Classes\Remove_Dashboard_Widgets;
+				$remove_widgets           = new Classes\Remove_Widgets;
 			}
 		}
 
@@ -171,6 +172,10 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 				'remove_widget_nav_menu'        => 'true',
 				'disable_press_this'            => 'true',
 				'remove_cat_tag_converter'      => 'true',
+				'remove_dashboard_right_now'    => 'true',
+				'remove_dashboard_activity'     => 'true',
+				'remove_dashboard_quick_press'  => 'true',
+				'remove_dashboard_primary'      => 'true',
 			);
 
 			// If is multisite.
