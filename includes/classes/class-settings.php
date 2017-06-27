@@ -133,6 +133,7 @@ if ( ! class_exists( 'Settings' ) ) {
 						echo wp_kses_post(
 							$this->tabs( array(
 								'general'   => __( 'General', 'wp-cms-settings' ),
+								'admin'     => __( 'Admin', 'wp-cms-settings' ),
 								'front-end' => __( 'Front End', 'wp-cms-settings' ),
 								'widgets'   => __( 'Widgets', 'wp-cms-settings' ),
 							) )
@@ -149,6 +150,9 @@ if ( ! class_exists( 'Settings' ) ) {
 							<?php
 							if ( ! empty( $this->fields ) ) {
 								switch ( $this->active_tab ) {
+									case 'admin':
+										include $this->fields['admin'];
+									break;
 									case 'front-end':
 										include $this->fields['front-end'];
 									break;
