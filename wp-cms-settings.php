@@ -128,12 +128,12 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 
 			// If enable CMS settings is enabled.
 			if ( isset( $option ) && 'true' === $option ) {
-				$disable_emojis     = new Classes\Disable_Emojis;
-				$disable_feeds      = new Classes\Disable_Feeds;
-				$disable_meta_links = new Classes\Disable_Meta_Links;
-				$remove_widgets     = new Classes\Remove_Widgets;
-				$disable_press_this = new Classes\Disable_Press_This;
-				//add_action( 'shutdown', array( 'WP_CMS_Settings\\Includes\\Classes\\Disable_Press_This', 'init' ) );
+				$disable_emojis           = new Classes\Disable_Emojis;
+				$disable_feeds            = new Classes\Disable_Feeds;
+				$disable_meta_links       = new Classes\Disable_Meta_Links;
+				$remove_widgets           = new Classes\Remove_Widgets;
+				$disable_press_this       = new Classes\Disable_Press_This;
+				$remove_cat_tag_converter = new Classes\Remove_Cat_Tag_Converter;
 			}
 		}
 
@@ -170,6 +170,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 				'remove_widget_tag_cloud'       => 'true',
 				'remove_widget_nav_menu'        => 'true',
 				'disable_press_this'            => 'true',
+				'remove_cat_tag_converter'      => 'true',
 			);
 
 			// If is multisite.

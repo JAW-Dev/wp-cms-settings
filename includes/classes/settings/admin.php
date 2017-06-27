@@ -25,3 +25,10 @@ echo wp_kses_post( wpcmss_create_checkbox( array(
 		'description' => __( 'Disable the Press This Functionality', 'wp-cms-settings' ),
 	) )
 );
+// Disable Press This.
+echo wp_kses_post( wpcmss_create_checkbox( array(
+		'option' => 'remove_cat_tag_converter',
+		'label'  => __( 'Remove Categories and Tag Converter', 'wp-cms-settings' ),
+		'description' => __( 'Remove Categories and Tag Converter from the Tools', 'wp-cms-settings' ),
+	) )
+);
