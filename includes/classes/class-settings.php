@@ -17,7 +17,7 @@ use \WP_CMS_Settings as Root;
 if ( ! class_exists( 'Settings' ) ) {
 
 	/**
-	 * Name
+	 * Settings
 	 *
 	 * @author Jason Witt
 	 * @since  0.0.1
@@ -132,10 +132,11 @@ if ( ! class_exists( 'Settings' ) ) {
 						<?php
 						echo wp_kses_post(
 							$this->tabs( array(
-								'general'   => __( 'General', 'wp-cms-settings' ),
-								'admin'     => __( 'Admin', 'wp-cms-settings' ),
-								'front-end' => __( 'Front End', 'wp-cms-settings' ),
-								'widgets'   => __( 'Widgets', 'wp-cms-settings' ),
+								'general'    => __( 'General', 'wp-cms-settings' ),
+								'admin'      => __( 'Admin', 'wp-cms-settings' ),
+								'front-end'  => __( 'Front End', 'wp-cms-settings' ),
+								'widgets'    => __( 'Widgets', 'wp-cms-settings' ),
+								'taxonomies' => __( 'Taxonomies', 'wp-cms-settings' ),
 							) )
 						);
 						?>
@@ -158,6 +159,9 @@ if ( ! class_exists( 'Settings' ) ) {
 									break;
 									case 'widgets':
 										include $this->fields['widgets'];
+									break;
+									case 'taxonomies':
+										include $this->fields['taxonomies'];
 									break;
 									case 'general':
 									default:
