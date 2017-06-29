@@ -91,6 +91,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		public function __construct() {
 			// Get the settings option.
 			$settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
+
 			// Pass an empty array if option is not set.
 			$this->get_settings = ( $settings ) ? $settings : array();
 		}
@@ -123,19 +124,23 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		 * @return void
 		 */
 		public function classes() {
-			$option   = ( isset( $this->get_settings['enable_cms_settings'] ) ) ? $this->get_settings['enable_cms_settings'] : 'false';
+			// Load the settings page.
 			$settings = new Classes\Settings;
 
-			// If enable CMS settings is enabled.
-			if ( isset( $option ) && 'true' === $option ) {
-				$disable_emojis           = new Classes\Disable_Emojis;
-				$disable_feeds            = new Classes\Disable_Feeds;
-				$disable_meta_links       = new Classes\Disable_Meta_Links;
-				$disable_press_this       = new Classes\Disable_Press_This;
-				$remove_cat_tag_converter = new Classes\Remove_Cat_Tag_Converter;
-				$remove_dashboard_widgets = new Classes\Remove_Dashboard_Widgets;
-				$remove_widgets           = new Classes\Remove_Widgets;
+			// Bail if enable_cms_settings not set.
+			$option   = ( isset( $this->get_settings['enable_cms_settings'] ) ) ? $this->get_settings['enable_cms_settings'] : 'false';
+			if ( ! isset( $option ) || 'true' !== $option ) {
+				return;
 			}
+
+			// Load if the classes.
+			$disable_emojis           = new Classes\Disable_Emojis;
+			$disable_feeds            = new Classes\Disable_Feeds;
+			$disable_meta_links       = new Classes\Disable_Meta_Links;
+			$disable_press_this       = new Classes\Disable_Press_This;
+			$remove_cat_tag_converter = new Classes\Remove_Cat_Tag_Converter;
+			$remove_dashboard_widgets = new Classes\Remove_Dashboard_Widgets;
+			$remove_widgets           = new Classes\Remove_Widgets;
 		}
 
 		/**
