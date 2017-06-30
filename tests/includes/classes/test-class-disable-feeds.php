@@ -37,16 +37,21 @@
 	  * @return void
 	  */
 	 public function setUp() {
-		 $this->file       = $this->dirname() . 'includes/classes/class-disable-feeds.php';
-		 $this->class_name = 'WP_CMS_Settings\\Includes\\Classes\\Disable_Feeds';
-		 $this->class      = new WP_CMS_Settings\Includes\Classes\Disable_Feeds();
-		 $this->methods    = array(
+		 $this->file            = $this->dirname() . 'includes/classes/class-disable-feeds.php';
+		 $this->class_name      = 'WP_CMS_Settings\\Includes\\Classes\\Disable_Feeds';
+		 $this->class           = new WP_CMS_Settings\Includes\Classes\Disable_Feeds();
+		 $this->methods         = array(
 			 'init',
 			 'disable_feeds',
 			 'disable_feed_page',
 		 );
-		 $this->properties  = array(
+		 $this->properties      = array(
 			 'settings',
+		 );
+		 $this->option_settings = array(
+			 array(
+				 'name' => 'disable_feeds',
+			 ),
 		 );
 		 $this->set_the_options();
 	 }
@@ -100,18 +105,5 @@
 			 );
 		 }
 		 $this->assertAddHooks( $hooks );
-	 }
-
-	 /**
-	  * Test Settings.
-	  *
-	  * @author Jason Witt
-	  * @since  0.0.1
-	  *
-	  * @return void
-	  */
-	 public function test_settings() {
-		$disable_feeds = ( isset( $this->options['disable_feeds'] ) ) ? $this->options['disable_feeds'] : 'false';
-		$this->assertEquals( 'true', $disable_feeds );
 	 }
  }

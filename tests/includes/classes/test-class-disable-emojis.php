@@ -27,16 +27,21 @@
 	  * @return void
 	  */
 	 public function setUp() {
-		 $this->file       = $this->dirname() . 'includes/classes/class-disable-emojis.php';
-		 $this->class_name = 'WP_CMS_Settings\\Includes\\Classes\\Disable_Emojis';
-		 $this->class      = new WP_CMS_Settings\Includes\Classes\Disable_Emojis();
-		 $this->methods    = array(
+		 $this->file            = $this->dirname() . 'includes/classes/class-disable-emojis.php';
+		 $this->class_name      = 'WP_CMS_Settings\\Includes\\Classes\\Disable_Emojis';
+		 $this->class           = new WP_CMS_Settings\Includes\Classes\Disable_Emojis();
+		 $this->methods         = array(
 			 'init',
 			 'disable_emojis',
 			 'disable_emojis_tinymce',
 		 );
-		 $this->properties  = array(
+		 $this->properties      = array(
 			 'settings',
+		 );
+		 $this->option_settings = array(
+			 array(
+				 'name' => 'disable_emojis',
+			 ),
 		 );
 		 $this->set_the_options();
 	 }
@@ -84,18 +89,5 @@
 			 ),
 		 );
 		 $this->assertAddHooks( $hooks );
-	 }
-
-	 /**
-	  * Test Settings.
-	  *
-	  * @author Jason Witt
-	  * @since  0.0.1
-	  *
-	  * @return void
-	  */
-	 public function test_settings() {
-		$emojis = ( isset( $this->options['disable_emojis'] ) ) ? $this->options['disable_emojis'] : 'false';
-		$this->assertEquals( 'true', $emojis );
 	 }
  }

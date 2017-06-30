@@ -40,6 +40,11 @@
 		 $this->properties  = array(
 			 'settings',
 		 );
+		 $this->option_settings = array(
+			 array(
+				 'name' => 'disable_press_this',
+			 ),
+		 );
 		 $this->set_the_options();
 	 }
 

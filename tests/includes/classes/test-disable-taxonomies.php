@@ -27,16 +27,24 @@
 	  * @return void
 	  */
 	 public function setUp() {
-		 $this->file       = $this->dirname() . 'includes/classes/class-disable-taxonomies.php';
-		 $this->class_name = 'WP_CMS_Settings\\Includes\\Classes\\Disable_Taxonomies';
-		 $this->class      = new WP_CMS_Settings\Includes\Classes\Disable_Taxonomies();
-		 $this->methods    = array(
+		 $this->file            = $this->dirname() . 'includes/classes/class-disable-taxonomies.php';
+		 $this->class_name      = 'WP_CMS_Settings\\Includes\\Classes\\Disable_Taxonomies';
+		 $this->class           = new WP_CMS_Settings\Includes\Classes\Disable_Taxonomies();
+		 $this->methods         = array(
 			 'init',
 			 'unregister_category',
 			 'unregister_post_tag',
 		 );
-		 $this->properties  = array(
+		 $this->properties      = array(
 			 'settings',
+		 );
+		 $this->option_settings = array(
+			 array(
+				 'name' => 'disable_categories',
+			 ),
+			 array(
+				 'name' => 'disable_post_tag',
+			 ),
 		 );
 		 $this->set_the_options();
 	 }

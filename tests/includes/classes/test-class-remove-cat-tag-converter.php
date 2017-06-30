@@ -27,17 +27,22 @@
 	  * @return void
 	  */
 	 public function setUp() {
-		 $this->file       = $this->dirname() . 'includes/classes/class-remove-cat-tag-converter.php';
-		 $this->class_name = 'WP_CMS_Settings\\Includes\\Classes\\Remove_Cat_Tag_Converter';
-		 $this->class      = new WP_CMS_Settings\Includes\Classes\Remove_Cat_Tag_Converter();
-		 $this->methods    = array(
+		 $this->file            = $this->dirname() . 'includes/classes/class-remove-cat-tag-converter.php';
+		 $this->class_name      = 'WP_CMS_Settings\\Includes\\Classes\\Remove_Cat_Tag_Converter';
+		 $this->class           = new WP_CMS_Settings\Includes\Classes\Remove_Cat_Tag_Converter();
+		 $this->methods         = array(
 			 'init',
 			 'tools_page',
 			 'styles',
 			 'remove_help_tab',
 		 );
-		 $this->properties  = array(
+		 $this->properties      = array(
 			 'settings',
+		 );
+		 $this->option_settings = array(
+			 array(
+				 'name' => 'remove_cat_tag_converter',
+			 ),
 		 );
 		 $this->set_the_options();
 	 }

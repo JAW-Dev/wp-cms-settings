@@ -27,18 +27,32 @@
 	  * @return void
 	  */
 	 public function setUp() {
-		 $this->file       = $this->dirname() . 'includes/classes/class-remove-dashboard-widgets.php';
-		 $this->class_name = 'WP_CMS_Settings\\Includes\\Classes\\Remove_Dashboard_Widgets';
-		 $this->class      = new WP_CMS_Settings\Includes\Classes\Remove_Dashboard_Widgets();
-		 $this->methods    = array(
+		 $this->file            = $this->dirname() . 'includes/classes/class-remove-dashboard-widgets.php';
+		 $this->class_name      = 'WP_CMS_Settings\\Includes\\Classes\\Remove_Dashboard_Widgets';
+		 $this->class           = new WP_CMS_Settings\Includes\Classes\Remove_Dashboard_Widgets();
+		 $this->methods         = array(
 			 'init',
 			 'remove_dashboard_right_now',
 			 'remove_dashboard_activity',
 			 'remove_dashboard_quick_press',
 			 'remove_dashboard_primary',
 		 );
-		 $this->properties  = array(
+		 $this->properties      = array(
 			 'settings',
+		 );
+		 $this->option_settings = array(
+			 array(
+				 'name' => 'remove_dashboard_right_now',
+			 ),
+			 array(
+				 'name' => 'remove_dashboard_activity',
+			 ),
+			 array(
+				 'name' => 'remove_dashboard_quick_press',
+			 ),
+			 array(
+				 'name' => 'remove_dashboard_primary',
+			 ),
 		 );
 		 $this->set_the_options();
 	 }

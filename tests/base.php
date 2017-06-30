@@ -61,6 +61,15 @@ abstract class Base_UnitTestCase extends \WP_UnitTestCase {
 	protected $properties = array();
 
 	/**
+	 * Option Settings.
+	 *
+	 * @since NEXT
+	 *
+	 * @var array
+	 */
+	protected $option_settings = array();
+
+	/**
 	 * Options.
 	 *
 	 * @author Jason Witt
@@ -149,7 +158,11 @@ abstract class Base_UnitTestCase extends \WP_UnitTestCase {
 
 		// Is Array sanity check.
 		if ( $this->methods && ( is_array( $this->methods ) && ! empty( $this->methods ) ) ) {
+
+			// Loop through the methods.
 			foreach ( $this->methods as $method ) {
+
+				// Test the method.
 				$this->assertTrue( method_exists( $this->class_name, $method ), 'The method "' . $method . '()" doesn\'t exist!' );
 			}
 		}
@@ -166,9 +179,45 @@ abstract class Base_UnitTestCase extends \WP_UnitTestCase {
 
 		// Is Array sanity check.
 		if ( $this->properties && ( is_array( $this->properties ) && ! empty( $this->properties ) ) ) {
+
+			// Loop through the properties.
 			foreach ( $this->properties as $property ) {
+
+				// Test the property.
 				$this->assertTrue( property_exists( $this->class_name, $property ), 'The property "$' . $property . '" doesn\'t exist!' );
 			}
+		}
+	}
+
+	/**
+	 * Test option settings.
+	 *
+	 * @author Jason Witt
+	 * @since  0.0.1
+	 *
+	 * @return void
+	 */
+	public function test_option_settings() {
+
+		// Bail if empty.
+		if ( empty( $this->option_settings ) ) {
+			$this->assertEquals( 'true', 'true' );
+		}
+
+		// Loop throught the settings array.
+		foreach ( $this->option_settings as $setting ) {
+
+			// Defaults.
+			$defaults = array(
+				'name'  => '',
+				'value' => 'true',
+			);
+
+			// The arguments.
+			$setting = wp_parse_args( $setting, $defaults );
+
+			// Test the setting.
+			$this->assertEquals( $setting['value'], $this->options[ $setting['name'] ] );
 		}
 	}
 
@@ -181,10 +230,14 @@ abstract class Base_UnitTestCase extends \WP_UnitTestCase {
 	 * @param array $args {
 	 *     The Arguments.
 	 *
-	 *     @type string  $hook_name The hook's name.
-	 *     @type string  $type      The type of hook.
-	 *     @type string  $method    The name of the method to hook.
-	 *     @type integer $priority  The priority of the hook execution.
+	 *     @type array $args {
+	 *         The setting arguments.
+	 *
+	 *         @type string  $hook_name The hook's name.
+	 *         @type string  $type      The type of hook.
+	 *         @type string  $method    The name of the method to hook.
+	 *         @type integer $priority  The priority of the hook execution.
+	 *     }
 	 * }
 	 *
 	 * @return void

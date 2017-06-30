@@ -37,17 +37,28 @@
 	  * @return void
 	  */
 	 public function setUp() {
-		 $this->file       = $this->dirname() . 'includes/classes/class-disable-meta-links.php';
-		 $this->class_name = 'WP_CMS_Settings\\Includes\\Classes\\Disable_Meta_Links';
-		 $this->class      = new WP_CMS_Settings\Includes\Classes\Disable_Meta_Links();
-		 $this->methods    = array(
+		 $this->file            = $this->dirname() . 'includes/classes/class-disable-meta-links.php';
+		 $this->class_name      = 'WP_CMS_Settings\\Includes\\Classes\\Disable_Meta_Links';
+		 $this->class           = new WP_CMS_Settings\Includes\Classes\Disable_Meta_Links();
+		 $this->methods         = array(
 			 'init',
 			 'disable_wlwmanifest',
 			 'disable_wp_generator',
 			 'disable_wp_shortlink',
 		 );
-		 $this->properties  = array(
+		 $this->properties      = array(
 			 'settings',
+		 );
+		 $this->option_settings = array(
+			 array(
+				 'name' => 'disable_wlwmanifest',
+			 ),
+			 array(
+				 'name' => 'disable_wp_generator',
+			 ),
+			 array(
+				 'name' => 'disable_wp_shortlink',
+			 ),
 		 );
 		 $this->set_the_options();
 	 }
@@ -80,22 +91,5 @@
 			 ),
 		 );
 		 $this->assertAddHooks( $hooks );
-	 }
-
-	 /**
-	  * Test Settings.
-	  *
-	  * @author Jason Witt
-	  * @since  0.0.1
-	  *
-	  * @return void
-	  */
-	 public function test_settings() {
-		$wlwmanifest  = ( isset( $this->options['disable_wlwmanifest'] ) ) ? $this->options['disable_wlwmanifest'] : 'false';
-		$wp_generator = ( isset( $this->options['disable_wp_generator'] ) ) ? $this->options['disable_wp_generator'] : 'false';
-		$wp_shortlink = ( isset( $this->options['disable_wp_shortlink'] ) ) ? $this->options['disable_wp_shortlink'] : 'false';
-		$this->assertEquals( 'true', $wlwmanifest );
-		$this->assertEquals( 'true', $wp_generator );
-		$this->assertEquals( 'true', $wp_shortlink );
 	 }
  }
