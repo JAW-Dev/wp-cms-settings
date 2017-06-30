@@ -38,12 +38,7 @@
 		 $this->properties  = array(
 			 'settings',
 		 );
-
-		 // Get the options.
-		 WP_CMS_Settings\wp_cms_settings()->_activate();
-		 $settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
-		 // Set settings property.
-		 $this->set_property( $this->class, 'settings', $settings );
+		 $this->set_the_options();
 	 }
 
 	 /**
@@ -59,13 +54,11 @@
 		 $hooks = array(
 			 array(
 				 'hook_name' => 'init',
+				 'type'      => 'add_action',
 				 'method'    => 'disable_emojis',
-				 'priority'  => 10,
 			 ),
 		 );
-		 foreach ( $hooks as $hook ) {
-			 $this->assertEquals( $hook['priority'], has_action( $hook['hook_name'], array( $this->class, $hook['method'] ) ), 'init() is not attaching ' . $hook['method'] . '() to ' . $hook['hook_name'] . '!' );
-		 }
+		 $this->assertAddHooks( $hooks );
 	 }
 
 	 /**
@@ -81,17 +74,28 @@
 		 $hooks = array(
 			 array(
 				 'hook_name' => 'tiny_mce_plugins',
+				 'type'      => 'add_filter',
 				 'method'    => 'disable_emojis_tinymce',
-				 'priority'  => 10,
 			 ),
 			 array(
 				 'hook_name' => 'wp_resource_hints',
+				 'type'      => 'add_filter',
 				 'method'    => 'disable_emojis_remove_dns_prefetch',
-				 'priority'  => 10,
 			 ),
 		 );
-		 foreach ( $hooks as $hook ) {
-			 $this->assertEquals( $hook['priority'], has_filter( $hook['hook_name'], array( $this->class, $hook['method'] ) ), 'disable_emojis() is not attaching ' . $hook['method'] . '() to ' . $hook['hook_name'] . '!' );
-		 }
+		 $this->assertAddHooks( $hooks );
+	 }
+
+	 /**
+	  * Test Settings.
+	  *
+	  * @author Jason Witt
+	  * @since  0.0.1
+	  *
+	  * @return void
+	  */
+	 public function test_settings() {
+		$emojis = ( isset( $this->options['disable_emojis'] ) ) ? $this->options['disable_emojis'] : 'false';
+		$this->assertEquals( 'true', $emojis );
 	 }
  }

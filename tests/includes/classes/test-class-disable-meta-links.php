@@ -19,6 +19,16 @@
  class Disable_Meta_Links_Test extends Base_UnitTestCase {
 
 	 /**
+	  * Options.
+	  *
+	  * @author Jason Witt
+	  * @since  0.0.1
+	  *
+	  * @var array
+	  */
+	 protected $options;
+
+	 /**
 	  * SetUp.
 	  *
 	  * @author Jason Witt
@@ -39,12 +49,7 @@
 		 $this->properties  = array(
 			 'settings',
 		 );
-
-		 // Get the options.
-		 WP_CMS_Settings\wp_cms_settings()->_activate();
-		 $settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
-		 // Set settings property.
-		 $this->set_property( $this->class, 'settings', $settings );
+		 $this->set_the_options();
 	 }
 
 	 /**
@@ -60,22 +65,37 @@
 		 $hooks = array(
 			 array(
 				 'hook_name' => 'init',
+				 'type'      => 'add_action',
 				 'method'    => 'disable_wlwmanifest',
-				 'priority'  => 10,
 			 ),
 			 array(
 				 'hook_name' => 'init',
+				 'type'      => 'add_action',
 				 'method'    => 'disable_wp_generator',
-				 'priority'  => 10,
 			 ),
 			 array(
 				 'hook_name' => 'init',
+				 'type'      => 'add_action',
 				 'method'    => 'disable_wp_shortlink',
-				 'priority'  => 10,
 			 ),
 		 );
-		 foreach ( $hooks as $hook ) {
-			 $this->assertEquals( $hook['priority'], has_action( $hook['hook_name'], array( $this->class, $hook['method'] ) ), 'init() is not attaching ' . $hook['method'] . '() to ' . $hook['hook_name'] . '!' );
-		 }
+		 $this->assertAddHooks( $hooks );
+	 }
+
+	 /**
+	  * Test Settings.
+	  *
+	  * @author Jason Witt
+	  * @since  0.0.1
+	  *
+	  * @return void
+	  */
+	 public function test_settings() {
+		$wlwmanifest  = ( isset( $this->options['disable_wlwmanifest'] ) ) ? $this->options['disable_wlwmanifest'] : 'false';
+		$wp_generator = ( isset( $this->options['disable_wp_generator'] ) ) ? $this->options['disable_wp_generator'] : 'false';
+		$wp_shortlink = ( isset( $this->options['disable_wp_shortlink'] ) ) ? $this->options['disable_wp_shortlink'] : 'false';
+		$this->assertEquals( 'true', $wlwmanifest );
+		$this->assertEquals( 'true', $wp_generator );
+		$this->assertEquals( 'true', $wp_shortlink );
 	 }
  }

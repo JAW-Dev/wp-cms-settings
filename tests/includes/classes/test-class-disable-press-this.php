@@ -40,12 +40,7 @@
 		 $this->properties  = array(
 			 'settings',
 		 );
-
-		 // Get the options.
-		 WP_CMS_Settings\wp_cms_settings()->_activate();
-		 $settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
-		 // Set settings property.
-		 $this->set_property( $this->class, 'settings', $settings );
+		 $this->set_the_options();
 	 }
 
 	 /**
@@ -61,19 +56,18 @@
 		 $hooks = array(
 			 array(
 				 'hook_name' => 'load-tools.php',
+				 'type'      => 'add_action',
 				 'method'    => 'tools_page',
-				 'priority'  => 10,
 			 ),
 			 array(
 				 'hook_name' => 'load-press-this.php',
+				 'type'      => 'add_action',
 				 'method'    => 'disable_press_this',
-				 'priority'  => 10,
 			 ),
 		 );
-		 foreach ( $hooks as $hook ) {
-			 $this->assertEquals( $hook['priority'], has_action( $hook['hook_name'], array( $this->class, $hook['method'] ) ), 'init() is not attaching ' . $hook['method'] . '() to ' . $hook['hook_name'] . '!' );
-		 }
+		 $this->assertAddHooks( $hooks );
 	 }
+
 	 /**
 	  * Test Tools Page.
 	  *
@@ -84,7 +78,18 @@
 	  */
 	 public function test_tools_page() {
 		 $this->class->tools_page();
-		 $this->assertEquals( 10, has_action( 'admin_enqueue_scripts', array( $this->class, 'styles' ) ), 'tools_page() is not attaching styles() to admin_enqueue_scripts!' );
-		 $this->assertEquals( 10, has_filter( 'contextual_help', array( $this->class, 'remove_help_tab' ) ), 'tools_page() is not attaching remove_help_tab() to contextual_help!' );
+		 $hooks = array(
+			 array(
+				 'hook_name' => 'admin_enqueue_scripts',
+				 'type'      => 'add_action',
+				 'method'    => 'styles',
+			 ),
+			 array(
+				 'hook_name' => 'contextual_help',
+				 'type'      => 'add_filter',
+				 'method'    => 'remove_help_tab',
+			 ),
+		 );
+		 $this->assertAddHooks( $hooks );
 	 }
  }

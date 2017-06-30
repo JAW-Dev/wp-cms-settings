@@ -14,8 +14,6 @@ namespace WP_CMS_Settings\Includes\Classes;
 
 use \WP_CMS_Settings as Root;
 
-//include ABSPATH . 'wp-admin/includes/class-wp-press-this.php';
-
 if ( ! class_exists( 'Remove_Cat_Tag_Converter' ) ) {
 
 	/**

@@ -40,12 +40,7 @@
 		 $this->properties  = array(
 			 'settings',
 		 );
-
-		 // Get the options.
-		 WP_CMS_Settings\wp_cms_settings()->_activate();
-		 $settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
-		 // Set settings property.
-		 $this->set_property( $this->class, 'settings', $settings );
+		 $this->set_the_options();
 	 }
 
 	 /**
@@ -61,27 +56,25 @@
 		 $hooks = array(
 			 array(
 				 'hook_name' => 'wp_dashboard_setup',
+				 'type'      => 'add_action',
 				 'method'    => 'remove_dashboard_right_now',
-				 'priority'  => 10,
 			 ),
 			 array(
 				 'hook_name' => 'wp_dashboard_setup',
+				 'type'      => 'add_action',
 				 'method'    => 'remove_dashboard_activity',
-				 'priority'  => 10,
 			 ),
 			 array(
 				 'hook_name' => 'wp_dashboard_setup',
+				 'type'      => 'add_action',
 				 'method'    => 'remove_dashboard_quick_press',
-				 'priority'  => 10,
 			 ),
 			 array(
 				 'hook_name' => 'wp_dashboard_setup',
+				 'type'      => 'add_action',
 				 'method'    => 'remove_dashboard_primary',
-				 'priority'  => 10,
 			 ),
 		 );
-		 foreach ( $hooks as $hook ) {
-			 $this->assertEquals( $hook['priority'], has_action( $hook['hook_name'], array( $this->class, $hook['method'] ) ), 'init() is not attaching ' . $hook['method'] . '() to ' . $hook['hook_name'] . '!' );
-		 }
+		 $this->assertAddHooks( $hooks );
 	 }
  }

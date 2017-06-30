@@ -61,6 +61,16 @@ abstract class Base_UnitTestCase extends \WP_UnitTestCase {
 	protected $properties = array();
 
 	/**
+	 * Options.
+	 *
+	 * @author Jason Witt
+	 * @since  0.0.1
+	 *
+	 * @var array
+	 */
+	protected $options = array();
+
+	/**
 	 * Properties.
 	 *
 	 * @since NEXT
@@ -68,6 +78,26 @@ abstract class Base_UnitTestCase extends \WP_UnitTestCase {
 	 * @var array
 	 */
 	protected $dirname;
+
+	/**
+	 * Set the options.
+	 *
+	 * @author Jason Witt
+	 * @since  0.0.1
+	 *
+	 * @return void
+	 */
+	public function set_the_options() {
+
+		// Run activation.
+		WP_CMS_Settings\wp_cms_settings()->_activate();
+
+		// Get the options.
+		$this->options = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
+
+		// Set settings property.
+		$this->set_property( $this->class, 'settings', $this->options );
+	}
 
 	/**
 	 * Initialize the class
@@ -139,6 +169,62 @@ abstract class Base_UnitTestCase extends \WP_UnitTestCase {
 			foreach ( $this->properties as $property ) {
 				$this->assertTrue( property_exists( $this->class_name, $property ), 'The property "$' . $property . '" doesn\'t exist!' );
 			}
+		}
+	}
+
+	/**
+	 * Test add hooks.
+	 *
+	 * @author Jason Witt
+	 * @since  0.0.1
+	 *
+	 * @param array $args {
+	 *     The Arguments.
+	 *
+	 *     @type string  $hook_name The hook's name.
+	 *     @type string  $type      The type of hook.
+	 *     @type string  $method    The name of the method to hook.
+	 *     @type integer $priority  The priority of the hook execution.
+	 * }
+	 *
+	 * @return void
+	 */
+	public function assertAddHooks( $args ) {
+
+		// Loop through the hooks.
+		foreach ( $args as $hook ) {
+
+			// Bail if parameters are not set.
+			if ( ! isset( $hook['hook_name'] ) || ! isset( $hook['method'] ) || ! isset( $hook['type'] ) ) {
+				return;
+			}
+
+			// Defualts.
+			$defaults = array(
+				'hook_name' => '',
+				'type'      => '',
+				'method'    => '',
+				'priority'  => 10,
+			);
+
+			// Arguments.
+			$hook = wp_parse_args( $hook, $defaults );
+
+			// Error message.
+			$error = $hook['method'] . '() is not attached to ' . $hook['hook_name'] . '!';
+
+			// Get the funtion to test.
+			switch ( $hook['type'] ) {
+				case 'add_action':
+					$type = has_action( $hook['hook_name'], array( $this->class, $hook['method'] ) );
+					break;
+				case 'add_filter':
+					$type = has_filter( $hook['hook_name'], array( $this->class, $hook['method'] ) );
+					break;
+			}
+
+			// Test.
+			$this->assertEquals( $hook['priority'], $type, $error );
 		}
 	}
 

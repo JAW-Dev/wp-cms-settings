@@ -55,12 +55,7 @@
 			 'settings',
 			 'widgets',
 		 );
-
-		 // Get the options.
-		 WP_CMS_Settings\wp_cms_settings()->_activate();
-		 $settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
-		 // Set settings property.
-		 $this->set_property( $this->class, 'settings', $settings );
+		 $this->set_the_options();
 	 }
 
 	 /**
@@ -78,12 +73,11 @@
 		 foreach ( $this->widgets as $widget ) {
 			 $hooks[] = array(
 				 'hook_name' => 'widgets_init',
+				 'type'      => 'add_action',
 				 'method'    => $widget,
 				 'priority'  => 11,
 			 );
 		 }
-		 foreach ( $hooks as $hook ) {
-			 $this->assertEquals( $hook['priority'], has_action( $hook['hook_name'], array( $this->class, $hook['method'] ) ), 'init() is not attaching ' . $hook['method'] . '() to ' . $hook['hook_name'] . '!' );
-		 }
+		 $this->assertAddHooks( $hooks );
 	 }
  }

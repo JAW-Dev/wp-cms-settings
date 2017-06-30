@@ -63,22 +63,20 @@
 		 $hooks = array(
 			 array(
 				 'hook_name' => $menu,
+				 'type'      => 'add_action',
 				 'method'    => 'settings_page',
-				 'priority'  => 10,
 			 ),
 			 array(
 				 'hook_name' => 'init',
+				 'type'      => 'add_action',
 				 'method'    => 'save',
-				 'priority'  => 10,
 			 ),
 			 array(
 				 'hook_name' => $notices,
+				 'type'      => 'add_action',
 				 'method'    => 'admin_notice',
-				 'priority'  => 10,
 			 ),
 		 );
-		 foreach ( $hooks as $hook ) {
-			 $this->assertEquals( $hook['priority'], has_action( $hook['hook_name'], array( $this->class, $hook['method'] ) ), 'init() is not attaching ' . $hook['method'] . '() to ' . $hook['hook_name'] . '!' );
-		 }
+		 $this->assertAddHooks( $hooks );
 	 }
  }
