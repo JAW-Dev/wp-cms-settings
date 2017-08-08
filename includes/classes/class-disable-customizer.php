@@ -80,7 +80,7 @@ if ( ! class_exists( 'Disable_Customizer' ) ) {
 		 * @return void
 		 */
 		public function remove_capability() {
-			add_filter( 'map_meta_cap', array( $this, 'filter_to_remove_customize_capability'), 10, 4 );
+			add_filter( 'map_meta_cap', array( $this, 'customizer_filter'), 10, 4 );
 		}
 		
 		/**
