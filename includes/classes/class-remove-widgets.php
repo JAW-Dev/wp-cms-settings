@@ -99,29 +99,5 @@ if ( ! class_exists( 'Remove_Widgets' ) ) {
 				}
 			});
 		}
-		
-		/**
-		 * Render Checkboxes.
-		 *
-		 * @author Jason Witt
-		 * @since  0.0.1
-		 *
-		 * @return void
-		 */
-		public function render_checkboxes() {
-			$this->get_wp_widgets(
-				function( $class_name, $option, $widget ) {
-					echo wp_kses_post(
-						wpcmss_create_checkbox(
-							array(
-								'option' => $option,
-								'label'  => __( $widget->name, 'wp-cms-settings' ),
-								'description' => __( "Remove $widget->name from the widgets list", 'wp-cms-settings' ),
-							)
-						)
-					);
-				}
-			);
-		}
 	}
 }
