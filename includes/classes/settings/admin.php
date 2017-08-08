@@ -18,11 +18,18 @@
 	</th>
 </tr>
 <?php
+// Disable Customizer.
+echo wp_kses_post( wpcmss_create_checkbox( array(
+		'option' => 'disable_customizer',
+		'label'  => __( 'Customizer', 'wp-cms-settings' ),
+		'description' => __( 'Disable the Customizer', 'wp-cms-settings' ),
+	) )
+);
 // Disable Press This.
 echo wp_kses_post( wpcmss_create_checkbox( array(
 		'option' => 'disable_press_this',
 		'label'  => __( 'Press This', 'wp-cms-settings' ),
-		'description' => __( 'Disable the Press This Functionality', 'wp-cms-settings' ),
+		'description' => __( 'Disable Press This', 'wp-cms-settings' ),
 	) )
 );
 // Disable Press This.
