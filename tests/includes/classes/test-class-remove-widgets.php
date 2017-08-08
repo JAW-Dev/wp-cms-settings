@@ -45,7 +45,8 @@
 			 'remove_widget_recent_comments',
 			 'remove_widget_rss',
 			 'remove_widget_tag_cloud',
-			 'remove_widget_nav_menu',
+			 'remove_nav_menu_widget',
+			 'remove_widget_custom_html',
 		 );
 		 $this->methods         = array(
 			 'init',
@@ -71,7 +72,8 @@
 				 'name' => 'remove_widget_recent_comments',
 				 'name' => 'remove_widget_rss',
 				 'name' => 'remove_widget_tag_cloud',
-				 'name' => 'remove_widget_nav_menu',
+				 'name' => 'remove_nav_menu_widget',
+				 'name' => 'remove_widget_custom_html',
 			 ),
 		 );
 		 $this->set_the_options();
