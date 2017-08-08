@@ -115,7 +115,7 @@ if ( ! class_exists( 'Disable_Press_This' ) ) {
 		 * @return void
 		 */
 		public function disable_press_this() {
-			wp_die( 'Press This functionality has been disabled.' );
+			wp_die( __('Press This functionality has been disabled.', 'wp-cms-settings' ) );
 		}
 	}
 }
