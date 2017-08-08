@@ -1,6 +1,6 @@
 <?php
 /**
- * Remove Default Sidebar Widgets
+ * Disable Press This
  *
  * @package    WP_CMS_Settings
  * @subpackage WP_CMS_Settings/Includes/Classes
@@ -17,7 +17,7 @@ use \WP_CMS_Settings as Root;
 if ( ! class_exists( 'Disable_Press_This' ) ) {
 
 	/**
-	 * Remove Default Sidebar Widgets.
+	 * Disable Press This.
 	 *
 	 * @author Jason Witt
 	 * @since  0.0.1
