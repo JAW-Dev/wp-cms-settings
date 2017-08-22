@@ -126,7 +126,7 @@ if ( ! class_exists( 'Settings' ) ) {
 			$option = ( isset( $this->settings['enable_cms_settings'] ) ) ? $this->settings['enable_cms_settings'] : 'false';
 			?>
 			<div class="wrap">
-				<h1><?php echo esc_html( get_admin_page_title() );?></h1>
+				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 				<?php if ( 'true' === $option ) : ?>
 					<h2 class="nav-tab-wrapper">
 						<?php
@@ -153,20 +153,20 @@ if ( ! class_exists( 'Settings' ) ) {
 								switch ( $this->active_tab ) {
 									case 'admin':
 										include $this->fields['admin'];
-									break;
+										break;
 									case 'front-end':
 										include $this->fields['front-end'];
-									break;
+										break;
 									case 'taxonomies':
 										include $this->fields['taxonomies'];
-									break;
+										break;
 									case 'widgets':
 										include $this->fields['widgets'];
-									break;
+										break;
 									case 'general':
 									default:
 										include $this->fields['general'];
-									break;
+										break;
 								}
 							}
 							?>
@@ -232,7 +232,11 @@ if ( ! class_exists( 'Settings' ) ) {
 			// The form nonce.
 			$nonce   = $this->plugin_slug . '_nonce';
 			$options = $this->settings;
-			$post    = $_POST[ $this->plugin_slug ];
+			if ( isset( $_POST[ $this->plugin_slug ] ) ) {
+				$post = $_POST[ $this->plugin_slug ];
+			} else {
+				return;
+			}
 
 			// Bail if nonce is not verified.
 			if ( ! isset( $_POST[ $nonce ] ) || ! wp_verify_nonce( $_POST[ $nonce ], $nonce ) ) {
