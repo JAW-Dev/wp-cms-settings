@@ -140,6 +140,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 			$disable_customizer       = new Classes\Disable_Customizer;
 			$disable_press_this       = new Classes\Disable_Press_This;
 			$disable_taxonomies       = new Classes\Disable_Taxonomies;
+			$move_site_icon           = new Classes\Move_Site_Icon;
 			$remove_cat_tag_converter = new Classes\Remove_Cat_Tag_Converter;
 			$remove_dashboard_widgets = new Classes\Remove_Dashboard_Widgets;
 			$remove_widgets           = new Classes\Remove_Widgets;
