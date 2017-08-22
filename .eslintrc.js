@@ -5,7 +5,7 @@ module.exports = {
 		"es6": true,
 	},
 	"extends": "wordpress",
-	"installedESLint": true,
+	//"installedESLint": true,
 	"plugins": [],
 	"rules": {
 		// Enforce spacing inside array brackets
@@ -17,7 +17,13 @@ module.exports = {
 			properties: 'always'
 		}],
 		// Disallow or enforce trailing commas
-		'comma-dangle': ['error', 'never'],
+		"comma-dangle": [1, {
+			"arrays": "always-multiline",
+			"objects": "always-multiline",
+			"imports": "always-multiline",
+			"exports": "always-multiline",
+			"functions": "never",
+		}],
 		// Enforce spacing before and after comma
 		'comma-spacing': 'error',
 		// Enforce one true comma style
