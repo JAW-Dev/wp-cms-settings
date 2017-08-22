@@ -43,10 +43,9 @@ if ( ! class_exists( 'Disable_Customizer' ) ) {
 		 * @return void
 		 */
 		public function __construct() {
-			
+
 			add_action( 'admin_init', function() {
 				global $submenu, $menu, $pagenow;
-				//echo '<pre>'; var_dump( $submenu ); echo '</pre>'; die;
 			});
 			// Set the properties.
 			$this->settings = Root\wp_cms_settings()->get_settings;
@@ -70,7 +69,7 @@ if ( ! class_exists( 'Disable_Customizer' ) ) {
 				add_action( 'admin_menu', array( $this, 'remove_menu_items' ) );
 			}
 		}
-		
+
 		/**
 		 * Remove Capability.
 		 *
@@ -80,9 +79,9 @@ if ( ! class_exists( 'Disable_Customizer' ) ) {
 		 * @return void
 		 */
 		public function remove_capability() {
-			add_filter( 'map_meta_cap', array( $this, 'customizer_filter'), 10, 4 );
+			add_filter( 'map_meta_cap', array( $this, 'customizer_filter' ), 10, 4 );
 		}
-		
+
 		/**
 		 * Customizer Filter.
 		 *
@@ -91,16 +90,13 @@ if ( ! class_exists( 'Disable_Customizer' ) ) {
 		 *
 		 * @param array  $caps    Returns the user's actual capabilities.
 		 * @param string $cap     Capability name.
-		 * @param int    $user_id The user ID.
-		 * @param array  $args    Adds the context to the cap. Typically the object ID.
 		 *
 		 * @return array $caps The user's capabilities.
 		 */
-		public function customizer_filter( $caps = array(), $cap = '', $user_id = 0, $args = array() ) {
-			if ($cap == 'customize') {
-				return array('nope');
+		public function customizer_filter( $caps = array(), $cap = '' ) {
+			if ( 'customize' === $cap ) {
+				return array( 'nope' );
 			}
-
 			return $caps;
 		}
 
@@ -113,9 +109,9 @@ if ( ! class_exists( 'Disable_Customizer' ) ) {
 		 * @return void
 		 */
 		public function disable_customizer() {
-			wp_die( __( 'Customizer functionality has been disabled.', 'wp-cms-settings' ) );
+			wp_die( esc_html( __( 'Customizer functionality has been disabled.', 'wp-cms-settings' ) ) );
 		}
-		
+
 		/**
 		 * Admin Actions.
 		 *
@@ -125,10 +121,10 @@ if ( ! class_exists( 'Disable_Customizer' ) ) {
 		 * @return void
 		 */
 		public function admin_actions() {
-			remove_action( 'plugins_loaded', '_wp_customize_include', 10);
-			remove_action( 'admin_enqueue_scripts', '_wp_customize_loader_settings', 11);
+			remove_action( 'plugins_loaded', '_wp_customize_include', 10 );
+			remove_action( 'admin_enqueue_scripts', '_wp_customize_loader_settings', 11 );
 		}
-		
+
 		/**
 		 * Remove Menu Items.
 		 *
@@ -139,10 +135,10 @@ if ( ! class_exists( 'Disable_Customizer' ) ) {
 		 */
 		public function remove_menu_items() {
 			global $submenu;
-			if ( isset( $submenu[ 'themes.php' ] ) ) {
-				foreach ( $submenu[ 'themes.php' ] as $index => $menu_item ) {
-					if ( in_array( 'Customize', $menu_item ) ) {
-						unset( $submenu[ 'themes.php' ][ $index ] );
+			if ( isset( $submenu['themes.php'] ) ) {
+				foreach ( $submenu['themes.php'] as $index => $menu_item ) {
+					if ( in_array( 'Customize', $menu_item, true ) ) {
+						unset( $submenu['themes.php'][ $index ] );
 					}
 				}
 			}
