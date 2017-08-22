@@ -26,7 +26,14 @@ window.mediaUploader = {};
 
 		app.$c.uploadButton.addEventListener( 'click', function( e ) {
 
-			var mediaUploader = wp.media.frames.file_frame = wp.media({
+			e.preventDefault();
+
+			if ( mediaUploader ) {
+				mediaUploader.open();
+				return;
+			}
+
+			mediaUploader = wp.media({
 				title: 'Choose Image',
 				button: {
 					text: 'Select',
@@ -36,13 +43,6 @@ window.mediaUploader = {};
 				},
 				multiple: false,
 			});
-
-			e.preventDefault();
-
-			if ( mediaUploader ) {
-				mediaUploader.open();
-				return;
-			}
 
 			// When a file is selected, grab the URL and set it as the text field's value
 			mediaUploader.on( 'select', function() {
