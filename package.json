@@ -42,7 +42,6 @@
 		"yargs": "latest"
 	},
 	"dependencies": {
-		"gulp-copy": "^1.0.0",
 		"normalize-scss": "latest"
 	}
 }
