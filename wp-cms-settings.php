@@ -158,6 +158,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 			// Deafult Settings.
 			$settings = array(
 				'enable_cms_settings'           => 'true',
+				'disable_comments'              => 'true',
 				'disable_emojis'                => 'true',
 				'disable_feeds'                 => 'true',
 				'disable_wlwmanifest'           => 'true',

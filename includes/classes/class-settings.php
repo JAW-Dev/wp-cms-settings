@@ -137,6 +137,7 @@ if ( ! class_exists( 'Settings' ) ) {
 								'front-end'  => __( 'Front End', 'wp-cms-settings' ),
 								'taxonomies' => __( 'Taxonomies', 'wp-cms-settings' ),
 								'widgets'    => __( 'Widgets', 'wp-cms-settings' ),
+								'comments'   => __( 'Comments', 'wp-cms-settings' ),
 							) )
 						);
 						?>
@@ -162,6 +163,9 @@ if ( ! class_exists( 'Settings' ) ) {
 										break;
 									case 'widgets':
 										include $this->fields['widgets'];
+										break;
+									case 'comments':
+										include $this->fields['comments'];
 										break;
 									case 'general':
 									default:
