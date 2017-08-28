@@ -134,6 +134,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 			}
 
 			// Load if the classes.
+			$disable_comments         = new Classes\Disable_Comments;
 			$disable_emojis           = new Classes\Disable_Emojis;
 			$disable_feeds            = new Classes\Disable_Feeds;
 			$disable_meta_links       = new Classes\Disable_Meta_Links;
