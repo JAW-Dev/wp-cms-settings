@@ -22,6 +22,6 @@
 echo wp_kses_post( wpcmss_create_checkbox( array(
 		'option' => 'disable_comments',
 		'label'  => __( 'Comments', 'wp-cms-settings' ),
-		'description' => __( 'Dissable Comments', 'wp-cms-settings' ),
+		'description' => __( 'Disable Comments', 'wp-cms-settings' ),
 	) )
 );
