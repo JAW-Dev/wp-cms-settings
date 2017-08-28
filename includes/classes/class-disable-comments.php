@@ -77,9 +77,11 @@ if ( ! class_exists( 'Disable_Comments' ) ) {
 			add_filter( 'comments_array', array( $this, 'hide_comments' ), 10, 2 );
 			add_action( 'admin_init', array( $this, 'remove_support' ) );
 			add_action( 'admin_menu', array( $this, 'remove_comments_menu_item' ) );
-			add_action( 'load-edit-comments.php', array( $this, 'disable_comments_page' ) );
+			add_action( 'load-edit-comments.php', array( $this, 'disable_comments_pages' ) );
+			add_action( 'load-comment.php', array( $this, 'disable_comments_pages' ) );
+			add_action( 'load-options-discussion.php', array( $this, 'disable_comments_pages' ) );
 		}
-		
+
 		/**
 		 * Remove comment support.
 		 *
@@ -90,15 +92,15 @@ if ( ! class_exists( 'Disable_Comments' ) ) {
 		 */
 		public function remove_support() {
 			$post_types = get_post_types();
-			
+
 			// Loop throught the post types.
 			foreach ( $post_types as $post_type ) {
-				
+
 				// Remove comments support.
 				if ( post_type_supports( $post_type, 'comments' ) ) {
-					remove_post_type_support ($post_type, 'comments' );
+					remove_post_type_support( $post_type, 'comments' );
 				}
-				
+
 				// Remove tractbacks support.
 				if ( post_type_supports( $post_type, 'trackbacks' ) ) {
 					remove_post_type_support( $post_type, 'trackbacks' );
@@ -132,7 +134,19 @@ if ( ! class_exists( 'Disable_Comments' ) ) {
 		 * @return void
 		 */
 		public function remove_comments_menu_item() {
+			global $submenu;
+
+			// Remove main Comments menu item.
 			remove_menu_page( 'edit-comments.php' );
+
+			// Remove Discussion sub-menu item.
+			if ( isset( $submenu['options-general.php'] ) ) {
+				foreach ( $submenu['options-general.php'] as $index => $menu_item ) {
+					if ( in_array( 'Discussion', $menu_item, true ) ) {
+						unset( $submenu['options-general.php'][ $index ] );
+					}
+				}
+			}
 		}
 
 		/**
@@ -143,7 +157,7 @@ if ( ! class_exists( 'Disable_Comments' ) ) {
 		 *
 		 * @return void
 		 */
-		public function disable_comments_page() {
+		public function disable_comments_pages() {
 			wp_die( __( 'Press Comments have been disabled.', 'wp-cms-settings' ) );
 		}
 	}
