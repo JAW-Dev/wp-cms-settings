@@ -75,8 +75,35 @@ if ( ! class_exists( 'Disable_Comments' ) ) {
 			add_filter( 'comments_open', '__return_false' );
 			add_filter( 'pings_open', '__return_false' );
 			add_filter( 'comments_array', array( $this, 'hide_comments' ), 10, 2 );
+			add_action( 'admin_init', array( $this, 'remove_support' ) );
 			add_action( 'admin_menu', array( $this, 'remove_comments_menu_item' ) );
 			add_action( 'load-edit-comments.php', array( $this, 'disable_comments_page' ) );
+		}
+		
+		/**
+		 * Remove comment support.
+		 *
+		 * @author Jason Witt
+		 * @since  0.0.1
+		 *
+		 * @return void
+		 */
+		public function remove_support() {
+			$post_types = get_post_types();
+			
+			// Loop throught the post types.
+			foreach ( $post_types as $post_type ) {
+				
+				// Remove comments support.
+				if ( post_type_supports( $post_type, 'comments' ) ) {
+					remove_post_type_support ($post_type, 'comments' );
+				}
+				
+				// Remove tractbacks support.
+				if ( post_type_supports( $post_type, 'trackbacks' ) ) {
+					remove_post_type_support( $post_type, 'trackbacks' );
+				}
+			}
 		}
 
 		/**
@@ -95,7 +122,7 @@ if ( ! class_exists( 'Disable_Comments' ) ) {
 			$comments = array();
 			return $comments;
 		}
-		
+
 		/**
 		 * Remove Comments menu item.
 		 *
