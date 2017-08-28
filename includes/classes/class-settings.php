@@ -135,9 +135,10 @@ if ( ! class_exists( 'Settings' ) ) {
 								'general'    => __( 'General', 'wp-cms-settings' ),
 								'admin'      => __( 'Admin', 'wp-cms-settings' ),
 								'front-end'  => __( 'Front End', 'wp-cms-settings' ),
+								'posts'      => __( 'Posts', 'wp-cms-settings' ),
+								'comments'   => __( 'Comments', 'wp-cms-settings' ),
 								'taxonomies' => __( 'Taxonomies', 'wp-cms-settings' ),
 								'widgets'    => __( 'Widgets', 'wp-cms-settings' ),
-								'comments'   => __( 'Comments', 'wp-cms-settings' ),
 							) )
 						);
 						?>
@@ -158,14 +159,17 @@ if ( ! class_exists( 'Settings' ) ) {
 									case 'front-end':
 										include $this->fields['front-end'];
 										break;
+									case 'posts':
+										include $this->fields['posts'];
+										break;
+									case 'comments':
+										include $this->fields['comments'];
+										break;
 									case 'taxonomies':
 										include $this->fields['taxonomies'];
 										break;
 									case 'widgets':
 										include $this->fields['widgets'];
-										break;
-									case 'comments':
-										include $this->fields['comments'];
 										break;
 									case 'general':
 									default:
