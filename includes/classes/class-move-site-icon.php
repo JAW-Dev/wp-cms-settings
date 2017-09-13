@@ -77,9 +77,21 @@ if ( ! class_exists( 'Move_Site_Icon' ) ) {
 			$this->settings    = Root\wp_cms_settings()->get_settings;
 			$this->debug       = ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) ? true : false;
 			$this->min         = ( ! $this->debug ) ? '.min' : '';
-			$this->plugin_data = get_plugin_data( trailingslashit( dirname( plugin_dir_path( __DIR__ ) ) ) . 'wp-cms-settings.php' );
+			add_action( 'admin_init', array( $this, 'get_plugin_data' ) );
 
 			$this->init();
+		}
+		
+		/**
+		 * Get Plugin Data.
+		 *
+		 * @author Jason Witt
+		 * @since  0.0.1
+		 *
+		 * @return void
+		 */
+		public function get_plugin_data() {
+			$this->plugin_data = get_plugin_data( trailingslashit( dirname( plugin_dir_path( __DIR__ ) ) ) . 'wp-cms-settings.php' );
 		}
 
 		/**
