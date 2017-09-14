@@ -125,7 +125,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		 */
 		public function classes() {
 			// Load the settings page.
-			$settings = new Classes\Settings;
+			$settings = new Classes\Settings();
 
 			// Bail if enable_cms_settings not set.
 			$option   = ( isset( $this->get_settings['enable_cms_settings'] ) ) ? $this->get_settings['enable_cms_settings'] : 'false';
@@ -134,18 +134,18 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 			}
 
 			// Load if the classes.
-			$disable_comments         = new Classes\Disable_Comments;
-			$disable_emojis           = new Classes\Disable_Emojis;
-			$disable_feeds            = new Classes\Disable_Feeds;
-			$disable_meta_links       = new Classes\Disable_Meta_Links;
-			$disable_customizer       = new Classes\Disable_Customizer;
-			$disable_press_this       = new Classes\Disable_Press_This;
-			$disable_taxonomies       = new Classes\Disable_Taxonomies;
-			$disable_posts            = new Classes\Disable_Posts;
-			$move_site_icon           = new Classes\Move_Site_Icon;
-			$remove_cat_tag_converter = new Classes\Remove_Cat_Tag_Converter;
-			$remove_dashboard_widgets = new Classes\Remove_Dashboard_Widgets;
-			$remove_widgets           = new Classes\Remove_Widgets;
+			$disable_comments         = new Classes\Disable_Comments();
+			$disable_emojis           = new Classes\Disable_Emojis();
+			$disable_feeds            = new Classes\Disable_Feeds();
+			$disable_meta_links       = new Classes\Disable_Meta_Links();
+			$disable_customizer       = new Classes\Disable_Customizer();
+			$disable_press_this       = new Classes\Disable_Press_This();
+			$disable_taxonomies       = new Classes\Disable_Taxonomies();
+			$disable_posts            = new Classes\Disable_Posts();
+			$move_site_icon           = new Classes\Move_Site_Icon();
+			$remove_cat_tag_converter = new Classes\Remove_Cat_Tag_Converter();
+			$remove_dashboard_widgets = new Classes\Remove_Dashboard_Widgets();
+			$remove_widgets           = new Classes\Remove_Widgets();
 		}
 
 		/**
@@ -183,7 +183,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 				'remove_widget_tag_cloud'       => 'true',
 				'remove_nav_menu_widget'        => 'true',
 				'remove_widget_custom_html'     => 'true',
-				'disable_customizer'			=> 'true',
+				'disable_customizer'            => 'true',
 				'disable_press_this'            => 'true',
 				'remove_cat_tag_converter'      => 'true',
 				'remove_dashboard_right_now'    => 'true',
