@@ -14,7 +14,7 @@ namespace WP_CMS_Settings\Includes\Classes;
 
 use \WP_CMS_Settings as Root;
 
-if ( ! class_exists( 'Move_Site_Icon' ) ) {
+if ( ! class_exists( '\\WP_CMS_Settings\\\Includes\\\Classes\\Move_Site_Icon' ) ) {
 
 	/**
 	 * Move site icon.

@@ -14,7 +14,7 @@ namespace WP_CMS_Settings\Includes\Classes;
 
 use \WP_CMS_Settings as Root;
 
-if ( ! class_exists( 'Remove_Dashboard_Widgets' ) ) {
+if ( ! class_exists( '\\WP_CMS_Settings\\\Includes\\\Classes\\Remove_Dashboard_Widgets' ) ) {
 
 	/**
 	 * Remove Default Dashboard Widgets.

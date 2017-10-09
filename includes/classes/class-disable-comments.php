@@ -14,7 +14,7 @@ namespace WP_CMS_Settings\Includes\Classes;
 
 use \WP_CMS_Settings as Root;
 
-if ( ! class_exists( 'Disable_Comments' ) ) {
+if ( ! class_exists( '\\WP_CMS_Settings\\\Includes\\\Classes\\Disable_Comments' ) ) {
 
 	/**
 	 * Disable Comments.

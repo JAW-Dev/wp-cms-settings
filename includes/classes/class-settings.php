@@ -14,7 +14,7 @@ namespace WP_CMS_Settings\Includes\Classes;
 
 use \WP_CMS_Settings as Root;
 
-if ( ! class_exists( 'Settings' ) ) {
+if ( ! class_exists( '\\WP_CMS_Settings\\\Includes\\\Classes\\Settings' ) ) {
 
 	/**
 	 * Settings
@@ -71,7 +71,7 @@ if ( ! class_exists( 'Settings' ) ) {
 			// Set the properties.
 			$this->plugin_slug = Root\wp_cms_settings()->plugin_slug;
 			$this->settings    = Root\wp_cms_settings()->get_settings;
-			$this->active_tab  = ( isset( $_GET['tab'] ) ) ? sanitize_text_field( $_GET['tab'] ) : 'allowed-roles';
+			$this->active_tab  = ( isset( $_GET['tab'] ) ) ? sanitize_text_field( $_GET['tab'] ) : '';
 
 			// Get the field views.
 			$this->fields = ( is_array( $this->include_fields() ) ) ? $this->include_fields() : array();
