@@ -90,7 +90,7 @@ if ( ! class_exists( 'WP_CMS_Settings' ) ) {
 		 */
 		public function __construct() {
 			// Get the settings option.
-			$settings = ( is_multisite() ) ? get_site_option( 'wp_cms_settings' ) : get_option( 'wp_cms_settings' );
+			$settings = ( is_multisite() ) ? get_site_option( $this->plugin_slug ) : get_option( $this->plugin_slug );
 
 			// Pass an empty array if option is not set.
 			$this->get_settings = ( $settings ) ? $settings : array();
