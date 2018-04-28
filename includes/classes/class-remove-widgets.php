@@ -58,7 +58,7 @@ if ( ! class_exists( '\\WP_CMS_Settings\\\Includes\\\Classes\\Remove_Widgets' ) 
 		public function init() {
 			add_action( 'widgets_init', array( $this, 'unregister_widgets' ),11 );
 		}
-		
+
 		/**
 		 * Get WP Widgets.
 		 *
@@ -69,11 +69,11 @@ if ( ! class_exists( '\\WP_CMS_Settings\\\Includes\\\Classes\\Remove_Widgets' ) 
 		 */
 		public function get_wp_widgets( $callback ) {
 			global $wp_widget_factory;
-			
+
 			// Loop through the registeres widgets.
 			foreach ( $wp_widget_factory->widgets as $widget ) {
-				$class_name =  get_class( $widget );
-				
+				$class_name = get_class( $widget );
+
 				// If the widget is a core widget.
 				// Test by looking for "WP_" prefix on object name.
 				if ( strpos( $class_name, 'WP_' ) !== false ) {
@@ -82,7 +82,7 @@ if ( ! class_exists( '\\WP_CMS_Settings\\\Includes\\\Classes\\Remove_Widgets' ) 
 				}
 			}
 		}
-		
+
 		/**
 		 * Unregister Widgets.
 		 *
@@ -93,7 +93,7 @@ if ( ! class_exists( '\\WP_CMS_Settings\\\Includes\\\Classes\\Remove_Widgets' ) 
 		 */
 		public function unregister_widgets() {
 			$this->get_wp_widgets( function( $class_name, $option, $widget ) {
-				$setting     = ( isset( $this->settings[ $option ] ) ) ? $this->settings[ $option ] : 'false';
+				$setting = ( isset( $this->settings[ $option ] ) ) ? $this->settings[ $option ] : 'false';
 				if ( 'true' === $setting ) {
 					unregister_widget( $class_name );
 				}
