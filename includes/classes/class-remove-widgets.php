@@ -65,6 +65,8 @@ if ( ! class_exists( '\\WP_CMS_Settings\\\Includes\\\Classes\\Remove_Widgets' ) 
 		 * @author Jason Witt
 		 * @since  0.0.1
 		 *
+		 * @param function $callback The callback function.
+		 *
 		 * @return void
 		 */
 		public function get_wp_widgets( $callback ) {
